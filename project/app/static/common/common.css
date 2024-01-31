@@ -3,7 +3,12 @@
 body {
   font-family: 'Poppins';
   font-weight: 400;
+  margin: 0;
+  padding: 0;
+  color: var(--text);
+  background-color: var(--background);
 }
+
 
 h1, h2, h3, h4, h5 {
 	font-family: 'Montserrat';
