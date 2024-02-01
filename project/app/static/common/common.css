@@ -36,6 +36,7 @@ small {font-size: 0.750rem; /* 12px */}
     --primary: hsl(193, 52%, 54%);
     --secondary: hsl(189, 43%, 91%);
     --accent: hsl(33, 72%, 79%);
+    --box-shadow: hsla(0, 0%, 0%, 0.08);
   }
 }
 @media (prefers-color-scheme: dark) {
@@ -45,5 +46,6 @@ small {font-size: 0.750rem; /* 12px */}
     --primary: hsl(193, 52%, 46%);
     --secondary: hsl(189, 43%, 9%);
     --accent: hsl(33, 72%, 21%);
+    --box-shadow: hsla(0, 0%, 100%, 0.08);
   }
 }
