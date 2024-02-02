@@ -9,7 +9,9 @@
     <title>Degree Planner</title>
     <link rel="stylesheet" href="../common/common.css">
     <link rel="stylesheet" href="../common/header.css">
+    <link rel="stylesheet" href="../common/sidebar.css"> <!-- Add this line -->
     <script src="../common/common.js"></script>
+    <script src="../common/sidebar.js"></script> <!-- Add this line -->
 </head>
 
 <body>
@@ -22,33 +24,28 @@
             </a>
         </div>
         <ul class="navigation-section">
-            <li class="nav-item"><a href="#">Majors/Minors</a></li>
-            <li class="nav-item"><a href="#">Credit Checker</a>	</li>
+            <li class="nav-item"><a href="#">Credit Checker</a></li>
             <li class="nav-item"><a href="#">Plan Your Degree</a></li>
             <li class="nav-item"><a href="#">GPA Calculator</a></li>
         </ul>
-		<div class="login-signup-container">
-			<a href="#" class="login-signup">
-				<img id="system-mode-icon" src="../common/img/sun.png" alt="System Mode Icon">
-				<button id="login-signup-button">Login / Signup</button>
-			</a>
-		</div>
+        <div class="login-signup-container">
+            <a href="#" class="login-signup">
+                <img id="system-mode-icon" src="../common/img/sun.png" alt="System Mode Icon">
+                <button id="login-signup-button">Login / Signup</button>
+            </a>
+        </div>
 
-		<!-- Mobile View -->
-		<img id="menu-icon" src="../common/img/menu.png" alt="Menu Icon">
-		<div id="sidebar-menu">
-            <ul class="navigation-section">
-                <li class="nav-item"><a href="#">Majors/Minors</a></li>
-                <li class="nav-item"><a href="#">Credit Checker</a>	</li>
-                <li class="nav-item"><a href="#">Plan Your Degree</a></li>
-                <li class="nav-item"><a href="#">GPA Calculator</a></li>
+        <!-- Mobile View -->
+        <img id="menu-icon" src="../common/img/menu.png" alt="Menu Icon" onclick="openNav()">
+        <img id="close-icon" src="../common/img/close-menu-dark.png" alt="Close Menu Icon" style="display: none;" onclick="closeNav()">
+        <div id="sidebar-menu" class="sidebar"> <!-- Add class "sidebar" -->
+            <ul class="sidebar-navigation-section">
+                <li class="sidebar-nav-item"><a href="#">Credit Checker</a></li>
+                <li class="sidebar-nav-item"><a href="#">Plan Your Degree</a></li>
+                <li class="sidebar-nav-item"><a href="#">GPA Calculator</a></li>
             </ul>
-		<div class="login-signup-container">
-			<a href="#" class="login-signup">
-				<img id="system-mode-icon" src="../common/img/sun.png" alt="System Mode Icon">
-				<button id="login-signup-button">Login / Signup</button>
-			</a>
-		</div>
+            <button id="login-signup-button">Login / Signup</button>
+        </div>
     </nav>
 </header>
 </body>

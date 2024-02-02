@@ -17,6 +17,10 @@ document.addEventListener('DOMContentLoaded', function() {
   const menuIconSrc = preferredColorScheme === 'dark' ? '../common/img/menu-dark.png' : '../common/img/menu.png';
   document.getElementById('menu-icon').src = menuIconSrc;
 
+  // Set the initial close menu icon based on the preferred color scheme
+  const closeIconSrc = preferredColorScheme === 'dark' ? '../common/img/close-menu-dark.png' : '../common/img/close-menu.png';
+  document.getElementById('close-icon').src = closeIconSrc;
+
   // Apply the preferred color scheme
   document.documentElement.className = preferredColorScheme;
 
@@ -40,8 +44,11 @@ function toggleDarkMode() {
   const menuIconSrc = newTheme === 'dark' ? '../common/img/menu-dark.png' : '../common/img/menu.png';
   document.getElementById('menu-icon').src = menuIconSrc;
 
+  // Update the close menu icon
+  const closeIconSrc = newTheme === 'dark' ? '../common/img/close-menu-dark.png' : '../common/img/close-menu.png';
+  document.getElementById('close-icon').src = closeIconSrc;
+
   // Apply the new theme
   document.documentElement.className = newTheme;
   localStorage.setItem('preferred-color-scheme', newTheme);
 }
-

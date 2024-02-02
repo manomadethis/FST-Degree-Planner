@@ -9,13 +9,14 @@ body {
   max-width: 90rem; /* 1440px */
   box-sizing: border-box;
   margin: 0 auto;
+  border-radius: 2rem;
 }
 
 .header-frame {
   height: 3.75rem; /* 60px */
   padding: 0.5rem 0 0.5rem 0; /* 8px 0 8px 0 */
   background: var(--background);
-  box-shadow: 0px 0.25rem 1.25rem var(--box-shadow);
+  box-shadow: 0px 0.125rem 0.625rem  var(--accent);
   justify-content: space-between;
   align-items: center;
   display: inline-flex;
@@ -38,7 +39,7 @@ body {
 
 .logo {
   height: 1.5625rem; /* 25px */
-  background: var(--background);
+  background: transparent;
   text-decoration: none;
   color: inherit;
   display: flex;
@@ -64,6 +65,15 @@ body {
 .nav-item a {
   text-decoration: none;
   color: inherit;
+  transition: color 0.3s ease;
+}
+
+.nav-item a.active {
+  color: var(--primary);
+}
+
+.nav-item a:hover {
+  color: var(--primary);
 }
 
 .login-signup-container {
@@ -94,19 +104,16 @@ body {
   padding: 0.5rem 0.75rem; /* 8px 16px */
   background-color: var(--text);
   color: var(--background);
-  border: 0.125rem solid var(--text);
-  border-radius: 0.3125rem; /* 5px */
+  border-radius: 2rem; /* 5px */
   cursor: pointer;
 }
 
-#menu-icon {
+#menu-icon, #close-icon {
   width: 2rem;
   cursor: pointer;
+  display: none; /* Hide both icons by default */
 }
 
-#menu-icon, #sidebar-menu {
-  display: none;
-}
 
 
 @media (max-width: 1000px) {
@@ -114,34 +121,30 @@ body {
     justify-content: flex-start;
   }
 
-  .navigation-section,
-  .login-signup-container #login-signup-button {
+  .navigation-section, .login-signup-container #login-signup-button {
     display: none;
   }
 
   #system-mode-icon {
     position: fixed;
-    right: 3rem; /* Adjust this value as needed */
-  }
-
-  #menu-icon {
-    margin-left: auto;
-    margin-right: 1rem; /* 16px */
+    right: 3rem;
+    z-index: 2;
   }
 
   .login-signup-container #system-mode-icon {
     display: block;
   }
 
-  #menu-icon, #sidebar-menu {
+  #menu-icon, #close-icon {
+    margin-left: auto;
     display: block;
+    z-index: 2;
+    position: fixed;
+    right: 1.0rem;
   }
 
-  #sidebar-menu {
+  #close-icon {
     display: none;
-  }
-
-  #sidebar-menu.open {
-    display: block;
+    z-index: 2;
   }
 }
