@@ -12,27 +12,45 @@
     <script src="../common/common.js"></script>
 </head>
 
+<body>
 <header class="header">
-	<nav class="header-frame">
-		<div class="logo-section">
-			<div class="logo-container">
-				<a href="#" class="logo-text">
-					<img id="degree-planner-logo"src="../common/img/degree-planner-logo.png" alt="Degree Planner Logo">
-					Degree Planner
-				</a>
-			</div>
-		</div>
-		<ul class="navigation-section">
-			<li class="nav-item"><a href="#">Courses</a></li>
-			<li class="nav-item"><a href="#">Majors/Minors</a></li>
-			<li class="nav-item"><a href="#"></a>Credit Checker</li>
-			<li class="nav-item"><a href="#">Plan Your Degree</a></li>
-			<li class="nav-item"><a href="#">GPA Calculator</a></li>
-		</ul>
+    <nav class="header-frame">
+        <div class="logo-container">
+            <a href="#" class="logo">
+                <img id="degree-planner-logo" src="../common/img/degree-planner-logo.png" alt="Degree Planner Logo">
+                Degree Planner
+            </a>
+        </div>
+        <ul class="navigation-section">
+            <li class="nav-item"><a href="#">Majors/Minors</a></li>
+            <li class="nav-item"><a href="#">Credit Checker</a>	</li>
+            <li class="nav-item"><a href="#">Plan Your Degree</a></li>
+            <li class="nav-item"><a href="#">GPA Calculator</a></li>
+        </ul>
 		<div class="login-signup-container">
-			<a href="#" class="login-signup-text">Login / Signup</a>
+			<a href="#" class="login-signup">
+				<img id="system-mode-icon" src="../common/img/sun.png" alt="System Mode Icon">
+				<button id="login-signup-button">Login / Signup</button>
+			</a>
 		</div>
-	</nav>
+
+		<!-- Mobile View -->
+		<img id="menu-icon" src="../common/img/menu.png" alt="Menu Icon">
+		<div id="sidebar-menu">
+            <ul class="navigation-section">
+                <li class="nav-item"><a href="#">Majors/Minors</a></li>
+                <li class="nav-item"><a href="#">Credit Checker</a>	</li>
+                <li class="nav-item"><a href="#">Plan Your Degree</a></li>
+                <li class="nav-item"><a href="#">GPA Calculator</a></li>
+            </ul>
+		<div class="login-signup-container">
+			<a href="#" class="login-signup">
+				<img id="system-mode-icon" src="../common/img/sun.png" alt="System Mode Icon">
+				<button id="login-signup-button">Login / Signup</button>
+			</a>
+		</div>
+    </nav>
 </header>
+</body>
 
 </html>

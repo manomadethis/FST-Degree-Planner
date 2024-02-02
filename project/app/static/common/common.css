@@ -29,23 +29,20 @@ h5 {font-size: 1.333rem; /* 21.28px */}
 
 small {font-size: 0.750rem; /* 12px */}
 
-@media (prefers-color-scheme: light) {
-  :root {
-    --text: hsl(63, 69%, 5%);
-    --background: hsl(210, 20%, 98%);
-    --primary: hsl(193, 52%, 54%);
-    --secondary: hsl(189, 43%, 91%);
-    --accent: hsl(33, 72%, 79%);
-    --box-shadow: hsla(0, 0%, 0%, 0.08);
-  }
+:root.light {
+  --text: hsl(63, 69%, 5%);
+  --background: hsl(210, 20%, 98%);
+  --primary: hsl(193, 52%, 54%);
+  --secondary: hsl(189, 43%, 91%);
+  --accent: hsl(33, 72%, 79%);
+  --box-shadow: hsla(0, 0%, 0%, 0.08);
 }
-@media (prefers-color-scheme: dark) {
-  :root {
-    --text: hsl(63, 69%, 95%);
-    --background: hsl(210, 20%, 2%);
-    --primary: hsl(193, 52%, 46%);
-    --secondary: hsl(189, 43%, 9%);
-    --accent: hsl(33, 72%, 21%);
-    --box-shadow: hsla(0, 0%, 100%, 0.08);
-  }
+
+:root.dark {
+  --text: hsl(63, 69%, 95%);
+  --background: hsl(210, 20%, 2%);
+  --primary: hsl(193, 52%, 46%);
+  --secondary: hsl(189, 43%, 9%);
+  --accent: hsl(33, 72%, 21%);
+  --box-shadow: hsla(0, 0%, 100%, 0.08);
 }

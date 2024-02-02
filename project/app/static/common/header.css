@@ -13,7 +13,7 @@ body {
 
 .header-frame {
   height: 3.75rem; /* 60px */
-  padding: 0.5rem 3rem;
+  padding: 0.5rem 0 0.5rem 0; /* 8px 0 8px 0 */
   background: var(--background);
   box-shadow: 0px 0.25rem 1.25rem var(--box-shadow);
   justify-content: space-between;
@@ -22,21 +22,21 @@ body {
 }
 
 .logo-container {
-  padding: 0.5rem 0.75rem; /* 8px 12px */
+  margin-left: 1rem; /* 16px */
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
-  gap: 0.625rem; /* 10px */
   display: inline-flex;
+  padding-right: 0;
 }
 
 #degree-planner-logo {
   width: 2rem;
   height: auto;
-  margin-right: 0.5rem; /* Adjust as needed */
+  margin-right: 0.5rem; /* 8px */
 }
 
-.logo-text {
+.logo {
   height: 1.5625rem; /* 25px */
   background: var(--background);
   text-decoration: none;
@@ -46,8 +46,10 @@ body {
 }
 
 .navigation-section {
+  left: 10rem;
+  padding-left: 0rem;
   list-style-type: none;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
   gap: 2.5rem; /* 40px */
   display: flex;
@@ -65,17 +67,81 @@ body {
 }
 
 .login-signup-container {
-  padding: 0.5rem; /* 12px */
-  background: var(--text);
-  border-radius: 0.5rem; /* 8px */
+  margin-right: 1rem; /* 16px */
+  flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
-  gap: 0.625rem; /* 10px */
-  display: flex;
+  display: inline-flex;
+  padding-right: 0;
 }
 
-.login-signup-text {
-  color: var(--background);
+#system-mode-icon {
+  width: 2rem;
+  height: auto;
+  margin-right: 0.5rem; /* 8px */
+}
+
+.login-signup {
+  height: 1.5625rem; /* 25px */
+  background: var(--background);
   text-decoration: none;
-  word-wrap: break-word;
+  color: inherit;
+  display: flex;
+  align-items: center;
+}
+
+#login-signup-button {
+  padding: 0.5rem 0.75rem; /* 8px 16px */
+  background-color: var(--text);
+  color: var(--background);
+  border: 0.125rem solid var(--text);
+  border-radius: 0.3125rem; /* 5px */
+  cursor: pointer;
+}
+
+#menu-icon {
+  width: 2rem;
+  cursor: pointer;
+}
+
+#menu-icon, #sidebar-menu {
+  display: none;
+}
+
+
+@media (max-width: 1000px) {
+  .header-frame {
+    justify-content: flex-start;
+  }
+
+  .navigation-section,
+  .login-signup-container #login-signup-button {
+    display: none;
+  }
+
+  #system-mode-icon {
+    position: fixed;
+    right: 3rem; /* Adjust this value as needed */
+  }
+
+  #menu-icon {
+    margin-left: auto;
+    margin-right: 1rem; /* 16px */
+  }
+
+  .login-signup-container #system-mode-icon {
+    display: block;
+  }
+
+  #menu-icon, #sidebar-menu {
+    display: block;
+  }
+
+  #sidebar-menu {
+    display: none;
+  }
+
+  #sidebar-menu.open {
+    display: block;
+  }
 }
