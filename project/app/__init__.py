@@ -12,7 +12,7 @@ def create_app():
 	db.init_app(app)
 
 	@app.route('/')
-	def home():
+	def example():
 		return 'Hello, World!'
 
 	return app

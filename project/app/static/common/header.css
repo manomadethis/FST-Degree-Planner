@@ -101,7 +101,7 @@ body {
 }
 
 #login-signup-button {
-  padding: 0.5rem 0.75rem; /* 8px 16px */
+  padding: 0.6rem 0.75rem; /* 8px 16px */
   background-color: var(--text);
   color: var(--background);
   border-radius: 2rem; /* 5px */

@@ -6,19 +6,19 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   // Set the initial logo image based on the preferred color scheme
-  const logoSrc = preferredColorScheme === 'light' ? '../common/img/degree-planner-logo-dark.png' : '../common/img/degree-planner-logo.png';
+  const logoSrc = preferredColorScheme === 'light' ? '../static/common/img/degree-planner-logo-dark.png' : '../static/common/img/degree-planner-logo.png';
   document.getElementById('degree-planner-logo').src = logoSrc;
 
   // Set the initial system mode icon based on the preferred color scheme
-  const systemModeIconSrc = preferredColorScheme === 'dark' ? '../common/img/moon.png' : '../common/img/sun.png';
+  const systemModeIconSrc = preferredColorScheme === 'dark' ? '../static/common/img/moon.png' : '../static/common/img/sun.png';
   document.getElementById('system-mode-icon').src = systemModeIconSrc;
 
   // Set the initial menu icon based on the preferred color scheme
-  const menuIconSrc = preferredColorScheme === 'dark' ? '../common/img/menu-dark.png' : '../common/img/menu.png';
+  const menuIconSrc = preferredColorScheme === 'dark' ? '../static/common/img/menu-dark.png' : '../static/common/img/menu.png';
   document.getElementById('menu-icon').src = menuIconSrc;
 
   // Set the initial close menu icon based on the preferred color scheme
-  const closeIconSrc = preferredColorScheme === 'dark' ? '../common/img/close-menu-dark.png' : '../common/img/close-menu.png';
+  const closeIconSrc = preferredColorScheme === 'dark' ? '../static/common/img/close-menu-dark.png' : '../static/common/img/close-menu.png';
   document.getElementById('close-icon').src = closeIconSrc;
 
   // Apply the preferred color scheme
@@ -33,19 +33,19 @@ function toggleDarkMode() {
   const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
 
   // Update the logo image
-  const logoSrc = newTheme === 'light' ? '../common/img/degree-planner-logo-dark.png' : '../common/img/degree-planner-logo.png';
+  const logoSrc = newTheme === 'light' ? '../static/common/img/degree-planner-logo-dark.png' : '../static/common/img/degree-planner-logo.png';
   document.getElementById('degree-planner-logo').src = logoSrc;
 
   // Update the system mode icon
-  const systemModeIconSrc = newTheme === 'dark' ? '../common/img/moon.png' : '../common/img/sun.png';
+  const systemModeIconSrc = newTheme === 'dark' ? '../static/common/img/moon.png' : '../static/common/img/sun.png';
   document.getElementById('system-mode-icon').src = systemModeIconSrc;
 
   // Update the menu icon
-  const menuIconSrc = newTheme === 'dark' ? '../common/img/menu-dark.png' : '../common/img/menu.png';
+  const menuIconSrc = newTheme === 'dark' ? '../static/common/img/menu-dark.png' : '../static/common/img/menu.png';
   document.getElementById('menu-icon').src = menuIconSrc;
 
   // Update the close menu icon
-  const closeIconSrc = newTheme === 'dark' ? '../common/img/close-menu-dark.png' : '../common/img/close-menu.png';
+  const closeIconSrc = newTheme === 'dark' ? '../static/common/img/close-menu-dark.png' : '../static/common/img/close-menu.png';
   document.getElementById('close-icon').src = closeIconSrc;
 
   // Apply the new theme
