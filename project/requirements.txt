@@ -5,3 +5,6 @@ spacy
 pdfplumber
 matplotlib
 authlib
+tabula
+pandas
+openpyxl

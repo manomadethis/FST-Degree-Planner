@@ -6,6 +6,14 @@ app = create_app()
 def home():
     return render_template('header.html')
 
+@app.route('/plan/')
+def dashboard():
+    return render_template('header.html')
+
+@app.route('/login/')
+def login():
+    return render_template('header.html')
+
 if __name__ == '__main__':
 	app.run(debug=True)
 

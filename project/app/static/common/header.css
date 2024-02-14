@@ -6,7 +6,8 @@ body {
 
 .header, .header-frame {
   width: 100%;
-  max-width: 90rem; /* 1440px */
+  align-items: center;
+  max-width: 120rem; /* 1920px */
   box-sizing: border-box;
   margin: 0 auto;
   border-radius: 2rem;
