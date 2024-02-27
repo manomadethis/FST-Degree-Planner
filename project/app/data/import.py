@@ -11,7 +11,7 @@ with app.app_context():
     conn = db.engine.raw_connection()
 
     # Read the Excel file (replace with your path to the file)
-    df = pd.read_excel("C:/Users/lambe/OneDrive/Documents/Courses/2023-2024/COMP3901/FST-Degree-Planner/project/app/data/degree_planner.xlsx")
+    df = pd.read_excel("C:/Users/lambe/OneDrive/Documents/Courses/2023-2024/Semester 2/COMP3901/FST-Degree-Planner/project/app/data/chemistry.xlsx")
     print(df.columns)
     # Get the raw connection from the SQLAlchemy engine
     conn = db.engine.raw_connection()
