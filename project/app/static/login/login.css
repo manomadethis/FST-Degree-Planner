@@ -1,2 +1,163 @@
-@import 'common/styles.css';
+.flex-container {
+	display: flex;
+	flex-direction: row;
+}
 
+.image-container, .signup-container {
+	flex: 1;
+}
+
+.image-container {
+	margin-top: 15rem; /* 32px */
+	margin-left: 5rem; /* 32px */
+}
+
+.signup-container, .login-container {
+    width: 47rem;
+}
+
+.signup-container, .login-container {
+	border: 1px solid var(--border-color);
+	border-radius: var(--spacing-2);
+	margin-right: var(--spacing-8);
+	margin-top: var(--spacing-16); /* 80px */
+	margin-left: var(--spacing-8); /* 40px */
+	max-width: 32rem; /* 512px */
+}
+
+.signup-frame, .login-frame {
+	margin-left: var(--spacing-7); /* 28px */
+	margin-top: var(--spacing-8); /* 32px */
+	margin-right: var(--spacing-6);
+}
+
+.welcome-text {
+	font-size: 1.25rem; /* 20px */
+	margin-bottom: 0;
+}
+
+.signup-text, .login-text {
+	font-size: 1.5rem;
+	font-weight: bold;
+	margin-top: 0;
+}
+
+.input-container label, .input-container input {
+	display: block;
+}
+
+.input-container label {
+	margin-bottom: var(--spacing-2); /* 8px */
+}
+
+.input-container input {
+    border: 1px solid hsl(0, 0%, 16%);
+    border-radius: var(--spacing-1);
+    margin-top: var(--spacing-2); /* 8px */
+    margin-bottom: var(--spacing-6); /* 20px */
+    padding: var(--spacing-4); /* 12px */
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.input-container input::placeholder {
+	color: #ababab;
+}
+
+.checkbox-forgot-password {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+	margin-bottom: var(--spacing-10);
+}
+
+.forgot-password a {
+    color: hsl(0, 0%, 30%);
+    text-decoration: none;
+}
+
+.remember-me {
+    display: flex;
+    align-items: center;
+}
+
+.remember-me input[type="checkbox"] {
+    margin-right: 0.5em; /* adjust as needed */
+}
+
+input[type="password"] {
+	background-image: url('../common/img/hide-password.png');
+	background-size: var(--spacing-6)rem;
+	background-position: right var(--spacing-3) center; /* Adjust as needed */
+	background-repeat: no-repeat;
+	background-size: var(--spacing-5) var(--spacing-5); /* Adjust as needed */
+}
+
+button[type="submit"] {
+	border-radius: var(--spacing-1);
+	margin-top: var(--spacing-2); /* 8px */
+	margin-bottom: var(--spacing-6); /* 20px */
+	padding: var(--spacing-4); /* 12px */
+	background-color: var(--primary);
+	color: var(--background);
+	width: 100%;
+    box-sizing: border-box;
+	cursor: pointer;
+}
+
+.signup-footer, .login-footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.signup-footer a, .login-footer a {
+	color: var(--text);
+	font-weight: bold;
+	text-decoration: none;
+}
+
+.footer-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.footer-links {
+    display: flex;
+    justify-content: center;
+    list-style-type: none;
+    text-decoration: none;
+    padding: 0;
+}
+
+.footer-links li {
+    margin: 0 10px;
+}
+
+.footer-links a {
+    text-decoration: none;
+    color: inherit;
+}
+
+hr {
+	border-color: var(--secondary);
+}
+
+@media (max-width: 1000px) {
+	.image-container {
+		display: none;
+	}
+
+	.flex-container, .footer-content {
+		justify-content: center;
+		align-items: center;
+	}
+
+	p {
+		text-align: center;
+		justify-content: center;
+		align-items: center;
+	}
+}

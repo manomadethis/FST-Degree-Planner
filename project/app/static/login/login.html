@@ -4,15 +4,168 @@
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta charset="UTF-8">
-	<meta name="description" content="Login Page for Degree Planner">
+	<meta name="description" content="Login Page - Degree Planner">
 	<meta name="author" content="Invisionaries">
-	<title>Log In</title>
-	<!-- Custom CSS -->
-	<link rel="stylesheet" href="../login/login.css">
-	<!-- Javascript -->
-	<script src="../login/login.js"></script>
+
+	<title>Log In - Degree Planner</title>
+
+    <link rel="stylesheet" href="../static/common/common.css">
+	<link rel="stylesheet" href="../static/login/login.css">
+    <link rel="stylesheet" href="../static/login/header.css">
+    <link rel="stylesheet" href="../static/login/sidebar.css">
+	<script src="../static/login/login.js"></script>
+    <script src="../static/login/sidebar.js"></script>
+    <script src="../static/login/system-mode.js"></script>
+    <script src="../static/login/login.js"></script>
 </head>
 
-<header>
-	{% include 'header.html' %}
-</header>
+<body>
+
+    <header class="header">
+        <nav class="header-frame">
+            <div class="logo-container">
+                <a href="/" class="logo">
+                    <img id="degree-planner-logo" src="../static/common/img/degree-planner-logo.png" alt="Degree Planner Logo">
+                    Degree Planner
+                </a>
+            </div>
+            <ul class="navigation-section">
+                <li class="nav-item"><a href="#">Create Your Plan</a></li>
+                <li class="nav-item"><a href="#">Check Your Credits</a></li>
+                <li class="nav-item"><a href="#">GPA Calculator</a></li>
+                <li class="nav-item"><a href="#">Query Information</a></li>
+            </ul>
+
+            <!-- Mobile View -->
+            <div class="system-mode-menu-container">
+                <img id="system-mode-mobile-icon" src="../static/common/img/sun.png" alt="System Mode Icon">
+                <img id="menu-icon" src="../static/common/img/menu.png" alt="Menu Icon" onclick="openNav()">
+                <img id="close-icon" src="../static/common/img/close-menu-dark.png" alt="Close Menu Icon" style="display: none;" onclick="closeNav()">
+            </div>
+            <div id="sidebar-menu" class="sidebar"> <!-- Add class "sidebar" -->
+                <ul class="sidebar-navigation-section">
+                    <li class="nav-item"><a href="#">Plan</a></li>
+                    <li class="nav-item"><a href="#">Credit Checker</a></li>
+                    <li class="nav-item"><a href="#">GPA Calculator</a></li>
+                    <li class="nav-item"><a href="#">Query Information</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <div class="flex-container">
+        <div class="image-container">
+            <img id="login-background" src="../static/common/img/login-background.svg" alt="Login Background Image">
+        </div>
+
+        <div class="signup-container tabcontent" id="signup">
+            <div class="signup-frame">
+                <div class="welcome-text">
+                    <p>Welcome!</p>
+                </div>
+
+                <div class="signup-text">
+                    <p>Sign up to<p>
+                </div>
+
+                <div class="degree-planner-text">
+                    <p>Degree Planner</p>
+                </div>
+
+                <div class="signup-body">
+                    <form action="/login" method="POST">
+                        <div class="input-container">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" placeholder="Enter your email" required autocomplete="email">
+                        </div>
+                        <div class="input-container">
+                            <label for="username">Username</label>
+                            <input type="text" id="username" name="username" placeholder="Enter your username" required autocomplete="username">
+                        </div>
+                        <div class="input-container">
+                            <label for="password">Password</label>
+                            <input type="password" id="password" name="password" placeholder="Enter your password" required>
+                        </div>
+                        <div class="input-container">
+                            <label for="confirm-password">Confirm Password</label>
+                            <input type="password" id="confirm-password" name="confirm-password" placeholder="Confirm your password" required>
+                        <div class="login-button-container">
+                            <button type="submit" class="login-button">Register</button>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="signup-footer">
+                    <p>Already have an account? <a href="" onclick="openTab(event, 'login')">Sign in</a></p>
+                </div>
+            </div>
+            </div>
+        </div>
+
+        <div class="login-container tabcontent" id="login">
+            <div class="login-frame">
+                <div class="welcome-text">
+                    <p>Welcome Back!</p>
+                </div>
+
+                <div class="login-text">
+                    <p>Log in to</p>
+                </div>
+
+                <div class="degree-planner-text">
+                    <p>Degree Planner</p>
+                </div>
+
+                <div class="login-body">
+                    <form action="/login" method="POST">
+                        <div class="input-container">
+                            <label for="login-email">Email</label>
+                            <input type="email" id="login-email" name="email" placeholder="Enter your email" required autocomplete="email">
+                        </div>
+                        <div class="input-container">
+                            <label for="login-password">Password</label>
+                            <input type="password" id="login-password" name="password" placeholder="Enter your password" required>
+                        </div>
+                        <div class="checkbox-forgot-password">
+                            <div class="remember-me">
+                                <input type="checkbox" id="remember-me" name="remember-me">
+                                <label for="remember-me">Remember me</label>
+                            </div>
+                            <div class="forgot-password">
+                                <a href="/forgot-password">Forgot password?</a>
+                            </div>
+                        </div>
+                        <div class="login-button-container">
+                            <button type="submit" class="login-button">Log In</button>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="login-footer">
+                    <p>Don't have an account? <a href="#" onclick="openTab(event, 'signup')">Sign up</a></p>
+                </div>
+            </div>
+        </div>
+        </div>
+
+
+    </div>
+
+    <br>
+    <!--<hr>-->
+
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2023-2024 Degree Planner. All rights reserved.</p>
+            <!--
+            <ul class="footer-links">
+                <li><a href="#">Terms of Service</a></li>
+                <li><a href="#">About Us</a></li>
+                <li><a href="#">Contact Us</a></li>
+            </ul>
+            -->
+        </div>
+    </footer>
+
+</body>
+</html>

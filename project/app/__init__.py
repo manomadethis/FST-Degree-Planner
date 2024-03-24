@@ -1,6 +1,7 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import create_engine
+from flask import render_template
 
 db = SQLAlchemy()
 
@@ -10,10 +11,6 @@ def create_app():
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
     db.init_app(app)
-
-    @app.route('/')
-    def example():
-        return 'Hello, World!'
 
     return app
 

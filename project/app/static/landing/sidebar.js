@@ -24,3 +24,4 @@ window.addEventListener('resize', function() {
         document.getElementById("menu-icon").style.display = "block";
     }
 });
+

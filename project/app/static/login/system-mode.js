@@ -9,9 +9,13 @@ document.addEventListener('DOMContentLoaded', function() {
   const logoSrc = preferredColorScheme === 'light' ? '../static/common/img/degree-planner-logo-dark.png' : '../static/common/img/degree-planner-logo.png';
   document.getElementById('degree-planner-logo').src = logoSrc;
 
-  // Set the initial system mode icon based on the preferred color scheme
-  const systemModeIconSrc = preferredColorScheme === 'dark' ? '../static/common/img/moon.png' : '../static/common/img/sun.png';
-  document.getElementById('system-mode-icon').src = systemModeIconSrc;
+  // Set the initial login background image based on the preferred color scheme
+  const loginBackgroundSrc = preferredColorScheme === 'dark' ? '../static/common/img/login-background.svg' : '../static/common/img/login-background-dark.svg';
+  document.getElementById('login-background').src = loginBackgroundSrc;
+
+  // Set the initial system mode mobile icon based on the preferred color scheme
+  const systemModeMobileIconSrc = preferredColorScheme === 'dark' ? '../static/common/img/moon.png' : '../static/common/img/sun.png';
+  document.getElementById('system-mode-mobile-icon').src = systemModeMobileIconSrc;
 
   // Set the initial menu icon based on the preferred color scheme
   const menuIconSrc = preferredColorScheme === 'dark' ? '../static/common/img/menu-dark.png' : '../static/common/img/menu.png';
@@ -24,8 +28,8 @@ document.addEventListener('DOMContentLoaded', function() {
   // Apply the preferred color scheme
   document.documentElement.className = preferredColorScheme;
 
-  // Add event listener to the system mode icon
-  document.getElementById('system-mode-icon').addEventListener('click', toggleDarkMode);
+  // Add event listener to the system mode mobile icon
+  document.getElementById('system-mode-mobile-icon').addEventListener('click', toggleDarkMode);
 });
 
 function toggleDarkMode() {
@@ -36,9 +40,13 @@ function toggleDarkMode() {
   const logoSrc = newTheme === 'light' ? '../static/common/img/degree-planner-logo-dark.png' : '../static/common/img/degree-planner-logo.png';
   document.getElementById('degree-planner-logo').src = logoSrc;
 
-  // Update the system mode icon
-  const systemModeIconSrc = newTheme === 'dark' ? '../static/common/img/moon.png' : '../static/common/img/sun.png';
-  document.getElementById('system-mode-icon').src = systemModeIconSrc;
+  // Update the login background image
+  const loginBackgroundSrc = newTheme === 'dark' ? '../static/common/img/login-background.svg' : '../static/common/img/login-background-dark.svg';
+  document.getElementById('login-background').src = loginBackgroundSrc;
+
+  // Update the system mode mobile icon
+  const systemModeMobileIconSrc = newTheme === 'dark' ? '../static/common/img/moon.png' : '../static/common/img/sun.png';
+  document.getElementById('system-mode-mobile-icon').src = systemModeMobileIconSrc;
 
   // Update the menu icon
   const menuIconSrc = newTheme === 'dark' ? '../static/common/img/menu-dark.png' : '../static/common/img/menu.png';
