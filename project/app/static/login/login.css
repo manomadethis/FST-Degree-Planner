@@ -93,7 +93,7 @@ input[type="password"] {
 	background-size: var(--spacing-5) var(--spacing-5); /* Adjust as needed */
 }
 
-button[type="submit"] {
+.login-button, .signup-button {
 	border-radius: var(--spacing-1);
 	margin-top: var(--spacing-2); /* 8px */
 	margin-bottom: var(--spacing-6); /* 20px */

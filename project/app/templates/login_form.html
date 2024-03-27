@@ -1,0 +1,46 @@
+{% extends "login.html" %}
+
+{% block content %}
+
+<div class="login-container tabcontent" id="login">
+    <div class="login-frame">
+        <div class="welcome-text">
+            <p>Welcome Back!</p>
+        </div>
+        <div class="login-text">
+            <p>Log in to</p>
+        </div>
+        <div class="degree-planner-text">
+            <p>Degree Planner</p>
+        </div>
+        <div class="login-body">
+            <form action="/login" method="POST">
+                {{ form.hidden_tag() }}
+                <div class="input-container">
+                    <label for="login-email">Email</label>
+                    {{ form.email(id='login-email', placeholder='Enter your email') }}
+                </div>
+                <div class="input-container">
+                    <label for="login-password">Password</label>
+                    {{ form.password(id='login-password', placeholder='Enter your password') }}
+                </div>
+                <div class="checkbox-forgot-password">
+                    <div class="remember-me">
+                        {{ form.remember_me() }} <label for="remember-me">Remember me</label>
+                    </div>
+                    <div class="forgot-password">
+                        <a href="/forgot-password">Forgot password?</a>
+                    </div>
+                </div>
+                <div class="login-button-container">
+                    {{ form.submit(class='login-button') }}
+                </div>
+            </form>
+        </div>
+        <div class="login-footer">
+            <p>Don't have an account? <a href="/signup">Sign up</a></p>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,51 @@
+{% extends "login.html" %}
+
+{% block content %}
+
+<div class="signup-container tabcontent" id="signup">
+    <div class="signup-frame">
+        <div class="welcome-text">
+            <p>Welcome!</p>
+        </div>
+
+        <div class="signup-text">
+            <p>Sign up to<p>
+        </div>
+
+        <div class="degree-planner-text">
+            <p>Degree Planner</p>
+        </div>
+
+        <div class="signup-body">
+            <form action="/signup" method="POST">
+                {{ form.hidden_tag() }}
+                <div class="input-container">
+                    <label for="email">Email</label>
+                    {{ form.email(id='email', placeholder='Enter your email') }}
+                </div>
+                <div class="input-container">
+                    <label for="username">Username</label>
+                    {{ form.username(id='username', placeholder='Enter your username') }}
+                </div>
+                <div class="input-container">
+                    <label for="password">Password</label>
+                    {{ form.password(id='password', placeholder='Enter your password') }}
+                </div>
+                <div class="input-container">
+                    <label for="confirm-password">Confirm Password</label>
+                    {{ form.confirm_password(id='confirm-password', placeholder='Confirm your password') }}
+                </div>
+                <div class="signup-button-container">
+                    {{ form.submit(class='login-button') }}
+                </div>
+            </form>
+        </div>
+
+        <div class="signup-footer">
+            <p>Already have an account? <a href="/login">Sign in</a></p>
+        </div>
+    </div>
+    </div>
+</div>
+
+{% endblock %}

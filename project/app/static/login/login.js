@@ -11,11 +11,3 @@ function openTab(evt, tabName) {
     // Show the current tab
     document.getElementById(tabName).style.display = "block";
 }
-
-window.onload = function() {
-    // Hide the login tab
-    document.getElementById('login').style.display = 'none';
-
-    // Show the signup tab
-    document.getElementById('signup').style.display = 'block';
-};
