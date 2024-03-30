@@ -99,7 +99,7 @@ h6 {
 
 :root.dark {
   --text: hsl(63, 69%, 95%);
-  --background: hsl(210, 20%, 2%);
+  --background: hsl(212, 21%, 12%);
   --primary: hsl(193, 52%, 46%);
   --secondary: hsl(189, 43%, 9%);
   --accent: hsl(33, 72%, 21%);

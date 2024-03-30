@@ -13,12 +13,13 @@
         <div class="degree-planner-text">
             <p>Degree Planner</p>
         </div>
+
         <div class="login-body">
             <form action="/login" method="POST">
                 {{ form.hidden_tag() }}
                 <div class="input-container">
-                    <label for="login-email">Email</label>
-                    {{ form.email(id='login-email', placeholder='Enter your email') }}
+                    <label for="login-identifier">Email or Username</label>
+                    {{ form.identifier(id='login-identifier', placeholder='Enter your email or username') }}
                 </div>
                 <div class="input-container">
                     <label for="login-password">Password</label>
@@ -36,6 +37,22 @@
                     {{ form.submit(class='login-button') }}
                 </div>
             </form>
+
+        <!-- Flash messages -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+                <script>
+                    setTimeout(function(){
+                        window.location.href = "{{ url_for('home') }}";
+                    }, 1000);
+                </script>
+            {% endif %}
+        {% endwith %}
         </div>
         <div class="login-footer">
             <p>Don't have an account? <a href="/signup">Sign up</a></p>

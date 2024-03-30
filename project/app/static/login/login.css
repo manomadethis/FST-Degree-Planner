@@ -161,3 +161,22 @@ hr {
 		align-items: center;
 	}
 }
+
+.alert-success {
+    color: green;
+}
+
+.alert-danger {
+    color: red;
+}
+
+.alert-info {
+    color: blue;
+}
+
+.alert-success, .alert-danger, .alert-info {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
