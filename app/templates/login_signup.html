@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block head %}
+    <title>Log In - Degree Planner</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='common/common.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='login/login.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='login/header.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='login/sidebar.css') }}">
+    <script src="{{ url_for('static', filename='login/login.js') }}"></script>
+    <script src="{{ url_for('static', filename='login/sidebar.js') }}"></script>
+    <script src="{{ url_for('static', filename='login/system-mode.js') }}"></script>
+    <script src="{{ url_for('static', filename='login/login.js') }}"></script>
+{% endblock %}
+
+{% block header %}
+    {% include "header_login.html" %}
+{% endblock %}
+
+{% block content %}
+
+    <div class="flex-container">
+        <div class="image-container">
+            <img id="login-background" src="{{ url_for('static', filename='assets/images/login_background_light.svg') }}" data-light-src="{{ url_for('static', filename='assets/images/login_background_light.svg') }}" data-dark-src="{{ url_for('static', filename='assets/images/login_background_dark.svg') }}" alt="Login Background Image">
+        </div>
+
+        {% block login_form %}
+        {% endblock %}
+
+        {% block signup_form %}
+        {% endblock %}
+    </div>
+
+    <br>
+
+    {% block footer %}
+    {% include "footer.html" %}
+    
+    {% endblock %}
+
+
+{% endblock %}
+
+
+</html>

@@ -1,0 +1,42 @@
+<header class="header">
+    <nav class="header-frame">
+        <div class="logo-container">
+            <a href="/" class="logo">
+                <span class="material-icons" id="degree-planner-logo">school</span>
+                Degree Planner
+            </a>
+        </div>
+        <ul class="navigation-section">
+            <li class="nav-item"><a href="#">Create Your Plan</a></li>
+            <li class="nav-item"><a href="#">Check Your Credits</a></li>
+            <li class="nav-item"><a href="#">GPA Calculator</a></li>
+            <li class="nav-item"><a href="#">Query Information</a></li>
+        </ul>
+        <div class="system-mode-user-container">
+            <a href="javascript:void(0);" class="system-mode-link">
+                <span class="material-icons" id="system-mode-icon">nights_stay</span>
+            </a>
+            <a href="/login" class="login-signup-link">
+                <span class="material-icons" id="user-icon">account_circle</span>
+            </a>
+        </div>
+
+        <!-- Mobile View -->
+        <div class="system-mode-menu-container">
+            <span class="material-icons" id="system-mode-mobile-icon">nights_stay</span>
+            <span class="material-icons" id="menu-icon" onclick="openNav()">menu</span>
+            <span class="material-icons" id="close-icon" style="display: none;" onclick="closeNav()">close</span>
+        </div>
+        <div id="sidebar-menu" class="sidebar"> <!-- Add class "sidebar" -->
+            <a href="/login" class="login-signup-link">
+                <span class="material-icons" id="user-icon">account_circle</span>
+            </a>
+            <ul class="sidebar-navigation-section">
+                <li class="nav-item"><a href="#">Plan</a></li>
+                <li class="nav-item"><a href="#">Credit Checker</a></li>
+                <li class="nav-item"><a href="#">GPA Calculator</a></li>
+                <li class="nav-item"><a href="#">Query Information</a></li>
+            </ul>
+        </div>
+    </nav>
+</header>

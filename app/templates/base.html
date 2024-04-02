@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <meta name="description" content="Degree Planner">
+    <meta name="author" content="Invisionaries">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    {% block head %}
+    <title>Degree Planner</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='common/common.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='landing/header.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='landing/sidebar.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='landing/landing.css') }}">
+    <script src="{{ url_for('static', filename='landing/system-mode.js') }}"></script>
+    <script src="{{ url_for('static', filename='landing/sidebar.js') }}"></script>
+    {% endblock %}
+</head>
+
+<body>
+    <header>
+    {% block header %}
+    {% endblock %}
+    </header>
+
+    {% block content %}
+    {% endblock %}
+</body>
+
+</html>
