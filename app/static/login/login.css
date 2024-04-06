@@ -86,6 +86,20 @@
 }
 
 input[type="password"] {
+	position: relative;
+}
+
+input[type="password"]::after {
+	content: "visibility_off";
+	font-family: 'Material Icons';
+	position: absolute;
+	right: var(--spacing-3);
+	top: 50%;
+	transform: translateY(-50%);
+	font-size: var(--spacing-5)rem;
+}
+
+input[type="password"] {
 	background-image: url('../common/img/hide-password.png');
 	background-size: var(--spacing-6)rem;
 	background-position: right var(--spacing-3) center; /* Adjust as needed */

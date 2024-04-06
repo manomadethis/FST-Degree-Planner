@@ -1,0 +1,28 @@
+.left-sidebar {
+    list-style-type: none;
+    padding: 0;
+}
+
+.left-sidebar-item span {
+    margin-right: var(--spacing-2);
+    color: var(--accent);
+}
+
+.left-sidebar-item {
+    margin-bottom: 1rem;
+    padding: var(--spacing-2);
+    border-radius: 1rem;
+    transition: background-color 0.2s;
+    background-color: var(--primary);
+}
+
+.left-sidebar-item a {
+    text-decoration: none;
+    color: var(--text);
+    display: flex;
+    align-items: center;
+}
+
+.left-sidebar-item.active {
+    background-color: var(--secondary);
+}

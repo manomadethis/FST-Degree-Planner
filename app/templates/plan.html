@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Degree Planner - Plan</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='common/common.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='plan/plan.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='plan/header.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='plan/sidebar.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='plan/left_sidebar.css') }}">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<script src="{{ url_for('static', filename='plan/plan.js') }}"></script>
+<script src="{{ url_for('static', filename='plan/system-mode.js') }}"></script>
+<script src="{{ url_for('static', filename='plan1/sidebar.js') }}"></script>
+
+{% endblock %}
+
+{% block header %}
+    {% include 'header_login.html' %}
+{% endblock %}
+
+{% block content %}
+
+    <div class="flex-container">
+        {% include 'left_sidebar.html' %}
+
+        <section>
+            <h1>Plan</h1>
+        </section>
+    </div>
+
+{% endblock %}
