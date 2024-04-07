@@ -7,10 +7,15 @@
             </a>
         </div>
         <ul class="navigation-section">
-            <li class="nav-item"><a href="#">Create Your Plan</a></li>
-            <li class="nav-item"><a href="#">Check Your Credits</a></li>
-            <li class="nav-item"><a href="#">GPA Calculator</a></li>
-            <li class="nav-item"><a href="#">Query Information</a></li>
+            <li class="nav-item">
+                <a href="{{ url_for('plan') }}">Plan</a>
+            </li>
+            <li class="nav-item">
+                <a href="{{ url_for('search') }}">Search</a>
+            </li>
+            <li class="nav-item">
+                <a href="{{ url_for('search') }}">AI</a>
+            </li>
         </ul>
         <div class="login-signup-container">
             <a href="javascript:void(0);" class="system-mode-link">
@@ -29,10 +34,15 @@
         </div>
         <div id="sidebar-menu" class="sidebar"> <!-- Add class "sidebar" -->
             <ul class="sidebar-navigation-section">
-                <li class="nav-item"><a href="#">Plan</a></li>
-                <li class="nav-item"><a href="#">Credit Checker</a></li>
-                <li class="nav-item"><a href="#">GPA Calculator</a></li>
-                <li class="nav-item"><a href="#">Query Information</a></li>
+                <li class="nav-item active">
+                    <a href="{{ url_for('plan') }}">Plan</a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ url_for('search') }}">Search</a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ url_for('search') }}">AI</a>
+                </li>
             </ul>
             <a href="/login" class="login-signup">
                 <button id="login-signup-button">Login / Signup</button>

@@ -6,7 +6,6 @@
 <link rel="stylesheet" href="{{ url_for('static', filename='search/search.css') }}">
 <link rel="stylesheet" href="{{ url_for('static', filename='search/header.css') }}">
 <link rel="stylesheet" href="{{ url_for('static', filename='search/sidebar.css') }}">
-<link rel="stylesheet" href="{{ url_for('static', filename='search/left_sidebar.css') }}">
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script src="{{ url_for('static', filename='search/search.js') }}"></script>
@@ -16,16 +15,13 @@
 {% endblock %}
 
 {% block header %}
-    {% include 'header_login.html' %}
+    {% include 'header_authenticated.html' %}
 {% endblock %}
 
 {% block content %}
 
     <div class="flex-container">
-        {% include 'left_sidebar.html' %}
-
         <section>
-            <h1>Search</h1>
             <div class="search-container">
                 <div class="filter-options">
                     <p>Filter by:</p>
@@ -52,8 +48,11 @@
                 </div>
 
                 <div id="search-results" class="dropdown-menu">
-
                 </div>
+            </div>
+        </section>
+        <section>
+            <div id="selected-search-item">
             </div>
         </section>
     </div>

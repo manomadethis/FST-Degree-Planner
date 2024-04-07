@@ -47,7 +47,30 @@ $(document).ready(function() {
                             hasResults = true;
                             resultsDiv.append('<h6>' + category + '</h6>');
                             results.forEach(function(result) {
-                                resultsDiv.append('<p>' + result + '</p>');
+                                var resultElement = $('<p class="search-result">' + result + '</p>');
+                                resultElement.on('click', (function(result) {
+                                    return function() {
+                                        var courseCode = result.split(' ')[0];
+                                        $.ajax({
+                                            url: '/course/' + encodeURIComponent(courseCode),
+                                            method: 'GET',
+                                            success: function(course) {
+                                                var description = course.description;
+                                                var formattedDescription = formatDescription(description);
+                                                var courseDetails = '<h2>' + course.title + ' (' + course.course_code + ')</h2>' +
+                                                                    '<p><strong>Level:</strong> ' + course.level + '</p>' +
+                                                                    '<p><strong>Credit:</strong> ' + course.credit + '</p>' +
+                                                                    '<p><strong>Semester:</strong> ' + course.semester + '</p>' +
+                                                                    '<p><strong>Is Elective:</strong> ' + (course.is_elective ? 'Yes' : 'No') + '</p>' +
+                                                                    '<p><strong>Department:</strong> ' + course.department_name + '</p>' +
+                                                                    '<p><strong>Faculty:</strong> ' + course.faculty_name + '</p>' +
+                                                                    '<div class="description">' + formattedDescription + '</div>';
+                                                $('#selected-search-item').html(courseDetails);
+                                            }
+                                        });
+                                    };
+                                })(result));
+                                resultsDiv.append(resultElement);
                             });
                         }
                     }
@@ -64,3 +87,27 @@ $(document).ready(function() {
         }
     }
 });
+
+function formatDescription(description) {
+    var lines = description.split('\n');
+    lines.splice(0, 3);
+    var newDescription = lines.join('\n');
+
+    var sections = newDescription.split('\n\n');
+    var formattedDescription = '';
+    sections.forEach(function(section) {
+        var lines = section.trim().split('\n');
+        formattedDescription += '<div class="section">';
+        lines.forEach(function(line) {
+            if (line.startsWith('-')) {
+                formattedDescription += '<div class="indent"><ul><li>' + line.trim().substring(1).trim() + '</li></ul></div>';
+            } else if (line.startsWith('Pre-requisites:') || line.startsWith('Pre-requisite:') || line.startsWith('Co-requisites:') || line.startsWith('Co-requisite:') || line.startsWith('Course Content:') || line.startsWith('Evaluation:')) {
+                formattedDescription += '<p><strong>' + line.trim() + '</strong></p>';
+            } else {
+                formattedDescription += '<p>' + line.trim() + '</p>';
+            }
+        });
+        formattedDescription += '</div>';
+    });
+    return formattedDescription;
+}

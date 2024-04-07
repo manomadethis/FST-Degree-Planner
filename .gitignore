@@ -39,3 +39,6 @@ Thumbs.db
 # Ignore virtual environments
 venv/
 env/
+
+# Ignore flask cache directory
+**/__pycache__/

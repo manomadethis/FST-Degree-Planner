@@ -3,38 +3,29 @@
     flex-direction: row;
 }
 
-.flex-container aside {
-    flex: 0 0 12.5rem; /* 200px */
-    height: max-content;
-    background-color: var(--card-background);
-    padding: var(--spacing-5);
-    box-sizing: border-box;
-    margin-left: var(--spacing-15);
-    border-radius: 1rem;
-    margin-top: 3.5rem;
-    display: block;
-}
-
 .flex-container section {
     flex-grow: 1;
     padding: var(--spacing-5);
     box-sizing: border-box;
     background-color: var(--card-background);
-    margin-right: var(--spacing-15);
     border-radius: 1rem;
-    margin-left: var(--spacing-5);
+    margin-left: 1rem;
+    margin-right: 1rem;
     margin-top: 3.5rem;
+    width: 100%;
+}
+
+
+.flex-container section:first-child {
+    max-width: calc(100% / 3);
 }
 
 .flex-container section h1 {
     text-align: center;
 }
 
-
 .search-container {
-    width: 50%;
-    margin: 0 auto;
-    padding: 0.5rem;
+    width: 100%;
 }
 
 .input-group {
@@ -64,6 +55,10 @@
     border-radius: 1rem;
 }
 
+#search-bar {
+    border-style: none;
+}
+
 .search-container input:focus {
     outline: none;
 }
@@ -72,6 +67,9 @@
     color: var(--background);
 }
 
+.search-result {
+    cursor: pointer;
+}
 
 
 .filter-options {
@@ -111,7 +109,6 @@
     background-color: var(--background);
     border: 1px solid var(--accent);
     border-radius: 1rem;
-    box-shadow: 0 2px 1rem var(--background);
     max-height: 15rem;
     overflow-y: auto;
     padding: 1rem;
