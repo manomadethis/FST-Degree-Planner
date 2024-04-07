@@ -152,7 +152,7 @@ def get_course(course_code):
         'is_elective': course.is_elective,
         'department_name': course.department_name,
         'faculty_name': course.faculty_name
-    })  
+    })
 
 @app.route('/department/<department_name>')
 def department_details(department_name):
