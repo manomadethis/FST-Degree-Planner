@@ -6,6 +6,7 @@
 <link rel="stylesheet" href="{{ url_for('static', filename='plan/plan.css') }}">
 <link rel="stylesheet" href="{{ url_for('static', filename='plan/header.css') }}">
 <link rel="stylesheet" href="{{ url_for('static', filename='plan/sidebar.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='plan/degree_plan.css') }}">
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <script src="{{ url_for('static', filename='plan/plan.js') }}"></script>
 <script src="{{ url_for('static', filename='plan/system-mode.js') }}"></script>
@@ -18,12 +19,23 @@
 {% endblock %}
 
 {% block content %}
-
+    <h1>Plan</h1>
     <div class="flex-container">
 
-        <section>
-            <h1>Plan</h1>
+        <section class="plan">
+            <div class="no-plan">
+                <p>You don't have a plan.</p>
+                <button id="create-plan-button" class="material-icons">add</button>
+            </div>
+
+            <div class="create">
+                {% include 'create_plan.html' %}
+            </div>
+
+            <div class="degree-plan">
+                {% include 'degree_plan.html' %}
+            </div>
         </section>
     </div>
-
 {% endblock %}
+

@@ -89,8 +89,8 @@ h6 {
   --text: hsl(63, 69%, 5%);
   --background: hsl(210, 20%, 98%);
   --primary: hsl(193, 52%, 54%);
-  --secondary: hsl(231, 52%, 37%);
-  --accent: hsl(55, 100%, 20%);
+  --secondary: hsl(151, 78%, 29%);
+  --accent: hsl(232, 100%, 20%);
   --box-shadow: hsla(0, 0%, 0%, 0.08);
   --border-color: hsl(0, 0%, 53%);
   --margin: 1.5rem;
@@ -101,8 +101,8 @@ h6 {
   --text: hsl(63, 69%, 95%);
   --background: hsl(0, 0%, 7%);
   --primary: hsl(193, 52%, 46%);
-  --secondary: hsl(231, 52%, 63%);
-  --accent: hsl(55, 100%, 80%);
+  --secondary: hsl(151, 78%, 71%);
+  --accent: hsl(232, 100%, 80%);
   --box-shadow: hsla(0, 0%, 100%, 0.08);
   --border-color: hsl(0, 0%, 53%);
   --margin: 1.5rem;

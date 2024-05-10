@@ -84,6 +84,15 @@ body {
   color: var(--primary);
 }
 
+.nav-item a {
+  display: flex;
+  align-items: center;
+}
+
+.nav-item a .material-icons, .nav-item a .material-icons-outlined {
+  margin-right: 0.5rem;
+}
+
 .login-signup-container {
   margin-right: var(--spacing-4); /* 16px */
   flex-direction: row;

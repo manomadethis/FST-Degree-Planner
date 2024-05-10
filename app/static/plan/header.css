@@ -78,7 +78,16 @@ body {
 
 .nav-item a:hover {
     color: var(--primary);
-} 
+}
+
+.nav-item a {
+    display: flex;
+    align-items: center;
+}
+
+.nav-item a .material-icons, .nav-item a .material-icons-outlined {
+    margin-right: 0.5rem;
+}
 
 #system-mode-mobile-icon {
     width: var(--spacing-8);

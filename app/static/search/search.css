@@ -1,3 +1,15 @@
+h1 {
+    font-size: 2rem;
+    margin-top: 5rem;
+    margin-bottom: 0;
+    text-align: center;
+    background-color: var(--card-background);
+    margin-left: 1rem;
+    margin-right: 1rem;
+    border-radius: 1rem;
+    padding: var(--spacing-2);
+}
+
 .flex-container {
     display: flex;
     flex-direction: row;
@@ -11,7 +23,7 @@
     border-radius: 1rem;
     margin-left: 1rem;
     margin-right: 1rem;
-    margin-top: 3.5rem;
+    margin-top: 1%;
     width: 100%;
 }
 

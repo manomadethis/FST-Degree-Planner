@@ -1,18 +1,18 @@
+h1 {
+    font-size: 2rem;
+    margin-top: 5rem;
+    margin-bottom: 0;
+    text-align: center;
+    background-color: var(--card-background);
+    margin-left: 1rem;
+    margin-right: 1rem;
+    border-radius: 1rem;
+    padding: var(--spacing-2);
+}
+
 .flex-container {
     display: flex;
     flex-direction: row;
-}
-
-.flex-container aside {
-    flex: 0 0 12.5rem; /* 200px */
-    height: max-content;
-    background-color: var(--card-background);
-    padding: var(--spacing-5);
-    box-sizing: border-box;
-    margin-left: var(--spacing-15);
-    border-radius: 1rem;
-    margin-top: 3.5rem;
-    display: block;
 }
 
 .flex-container section {
@@ -20,12 +20,78 @@
     padding: var(--spacing-5);
     box-sizing: border-box;
     background-color: var(--card-background);
-    margin-right: var(--spacing-15);
+    margin-right: 1rem;
     border-radius: 1rem;
     margin-left: var(--spacing-5);
-    margin-top: 3.5rem;
+    margin-top: 1rem;
+    height: 70vh;
 }
 
-.flex-container section h1 {
+.plan {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+}
+
+.no-plan {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.create {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.create #create-your-plan {
+    margin-top: var(--spacing-2);
+    margin-bottom: var(--spacing-2);
+}
+
+.create input {
+    margin-top: var(--spacing-2);
+    margin-bottom: var(--spacing-2);
+    padding: var(--spacing-2);
+    border-radius: 0.5rem;
+    border-style: none;
+}
+
+.no-plan {
+    display: none; /* Set to none from flex for testing */
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.create-plan {
     text-align: center;
+}
+
+.flex-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+select {
+	padding: 0.5rem;
+    margin-bottom: var(--spacing-2);
+    border-radius: 0.25rem;
+    border-style: none;
+    margin-right: 0.5rem;
+    font-family: Poppins;
+}
+
+#create-plan-button {
+    background-color: var(--primary);
+    cursor: pointer;
+    border-radius: 0.5rem;
+    padding: var(--spacing-2);
+    color: var(--text);
+    border-style: none;
 }

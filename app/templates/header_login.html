@@ -7,10 +7,15 @@
             </a>
         </div>
         <ul class="navigation-section">
-            <li class="nav-item"><a href="#">Create Your Plan</a></li>
-            <li class="nav-item"><a href="#">Check Your Credits</a></li>
-            <li class="nav-item"><a href="#">GPA Calculator</a></li>
-            <li class="nav-item"><a href="#">Query Information</a></li>
+            <li class="nav-item active">
+                <a href="{{ url_for('plan') }}">Plan</a>
+            </li>
+            <li class="nav-item">
+                <a href="{{ url_for('search') }}">Search</a>
+            </li>
+            <li class="nav-item">
+                <a href="{{ url_for('search') }}">AI</a>
+            </li>
         </ul>
 
         <!-- Mobile View -->
@@ -21,10 +26,15 @@
         </div>
         <div id="sidebar-menu" class="sidebar">
             <ul class="sidebar-navigation-section">
-                <li class="nav-item"><a href="#">Plan</a></li>
-                <li class="nav-item"><a href="#">Credit Checker</a></li>
-                <li class="nav-item"><a href="#">GPA Calculator</a></li>
-                <li class="nav-item"><a href="#">Query Information</a></li>
+                <li class="nav-item active">
+                    <a href="{{ url_for('plan') }}"><i class="material-icons">event_note</i> Plan</a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ url_for('search') }}"><i class="material-icons">search</i> Search</a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ url_for('search') }}"><i class="material-icons-outlined">code</i> AI</a>
+                </li>
             </ul>
         </div>
     </nav>

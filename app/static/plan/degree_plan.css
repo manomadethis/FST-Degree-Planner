@@ -1,0 +1,34 @@
+
+.course-card {
+    padding: 0.25rem;
+    background-color: var(--primary);;
+    cursor: move;
+    border-radius: 0.5rem;
+}
+
+.degree-plan-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.degree-plan-table th, .degree-plan-table td {
+    text-align: center;
+    padding: 10px;
+    border: 1px solid var(--border-color);
+}
+
+.degree-plan-table tr:first-child th {
+    border-top: none;
+}
+
+.degree-plan-table tr:last-child td {
+    border-bottom: none;
+}
+
+.degree-plan-table tr td:first-child {
+    border-left: none;
+}
+
+.degree-plan-table tr td:last-child {
+    border-right: none;
+}

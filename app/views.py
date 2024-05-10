@@ -19,8 +19,6 @@ def home():
     else:
         return render_template('landing.html')
 
-
-
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     form = LoginForm()
@@ -41,13 +39,15 @@ def login():
             # Log the user in
             login_user(user)
 
+            # Check if the user is authenticated right after logging them in
             if current_user.is_authenticated:
                 flash('Login successful!', 'success')
                 return redirect(url_for('plan'))
             else:
-                flash('Login failed. Please try again.', 'danger')
+                return render_template('login_form.html', form=form)
         except Exception as e:
             flash('Login failed. Please try again.', 'danger')
+            return render_template('login_form.html', form=form)
     return render_template('login_form.html', form=form)
 
 @app.route('/signup', methods=['GET', 'POST'])

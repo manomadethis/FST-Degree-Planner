@@ -37,7 +37,6 @@
 }
 
 .signup-text, .login-text {
-	font-size: 1.5rem;
 	font-weight: bold;
 	margin-top: 0;
 }
@@ -72,7 +71,7 @@
 }
 
 .forgot-password a {
-    color: hsl(0, 0%, 30%);
+    color: var(--secondary);
     text-decoration: none;
 }
 
@@ -100,11 +99,17 @@ input[type="password"]::after {
 }
 
 input[type="password"] {
-	background-image: url('../common/img/hide-password.png');
-	background-size: var(--spacing-6)rem;
-	background-position: right var(--spacing-3) center; /* Adjust as needed */
-	background-repeat: no-repeat;
-	background-size: var(--spacing-5) var(--spacing-5); /* Adjust as needed */
+	position: relative;
+}
+
+input[type="password"]::after {
+	content: "visibility_off";
+	font-family: 'Material Icons';
+	position: absolute;
+	right: var(--spacing-3);
+	top: 50%;
+	transform: translateY(-50%);
+	font-size: var(--spacing-5)rem;
 }
 
 .login-button, .signup-button {

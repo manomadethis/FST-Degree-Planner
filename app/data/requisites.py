@@ -8,7 +8,10 @@ from app import create_app, db
 
 app = create_app()
 
-def process_requisites():
+def process_requisites(file_path):
+    file_name = os.path.basename(file_path)
+    print(f"\nUpdating course requisites from file: {file_name}")
+
     with app.app_context():
         conn = db.engine.raw_connection()
 
@@ -78,6 +81,6 @@ def process_requisites():
                 if result is None:
                     sql = """INSERT INTO antirequisite_courses (course_code, antirequisite_course_code) VALUES (%s, %s)"""
                     cur.execute(sql, (row['CODE'], anti))
-            # Commit the changes and close the connection
+    # Commit the changes and close the connection
     conn.commit()
     conn.close()
