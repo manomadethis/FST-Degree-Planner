@@ -1,16 +1,5 @@
-h1 {
-    font-size: 2rem;
-    margin-top: 5rem;
-    margin-bottom: 0;
-    text-align: center;
-    background-color: var(--card-background);
-    margin-left: 1rem;
-    margin-right: 1rem;
-    border-radius: 1rem;
-    padding: var(--spacing-2);
-}
-
 .flex-container {
+    margin-top: 4rem;
     display: flex;
     flex-direction: row;
 }
@@ -103,10 +92,13 @@ h1 {
     margin: --(spacing-05) 0;
 }
 
-.radio-container {
+.radio-container .row {
     display: flex;
+    flex-direction: row;
     justify-content: space-between;
+    align-items: center;
     width: 100%;
+    margin-bottom: 0.5rem;
 }
 
 .filter-options label {
@@ -121,7 +113,7 @@ h1 {
     background-color: var(--background);
     border: 1px solid var(--accent);
     border-radius: 1rem;
-    max-height: 15rem;
+    max-height: 18rem;
     overflow-y: auto;
     padding: 1rem;
     width: auto;

@@ -2,8 +2,6 @@ Flask
 psycopg2-binary
 Flask-SQLAlchemy
 spacy
-pdfplumber
-matplotlib
 authlib
 tabula
 pandas

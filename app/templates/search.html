@@ -19,26 +19,37 @@
 {% endblock %}
 
 {% block content %}
-
-    <h1>Search</h1>
     <div class="flex-container">
         <section>
             <div class="search-container">
                 <div class="filter-options">
                     <p>Filter by:</p>
                     <div class="radio-container">
-                        <label>
-                            <input type="radio" name="filter" value="course"> Course
-                        </label>
-                        <label>
-                            <input type="radio" name="filter" value="major"> Major
-                        </label>
-                        <label>
-                            <input type="radio" name="filter" value="minor"> Minor
-                        </label>
-                        <label>
-                            <input type="radio" name="filter" value="department"> Department
-                        </label>
+                        <div class="row">
+                            <label>
+                                <input type="radio" name="filter" value="all" checked> All
+                            </label>
+                            <label>
+                                <input type="radio" name="filter" value="course"> Course
+                            </label>
+                            <label>
+                                <input type="radio" name="filter" value="major"> Major
+                            </label>
+                            <label>
+                                <input type="radio" name="filter" value="minor"> Minor
+                            </label>
+                        </div>
+                        <div class="row">
+                            <label>
+                                <input type="radio" name="filter" value="programme"> Programme
+                            </label>
+                            <label>
+                                <input type="radio" name="filter" value="department"> Department
+                            </label>
+                            <label>
+                                <input type="radio" name="filter" value="faculty"> Faculty
+                            </label>
+                        </div>
                     </div>
                 </div>
                 <div class="input-group">

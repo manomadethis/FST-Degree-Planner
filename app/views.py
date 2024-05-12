@@ -3,10 +3,10 @@ from flask_login import current_user, login_required, login_user, logout_user
 from . import create_app
 from .forms import LoginForm, SignupForm
 from .user import User, load_user
-from .models import hash_password
+from .models import MajorAdvancedCourse, MajorDepartmentalRequirement, MajorLevel1Course, MinorAdvancedCourse, MinorDepartmentalRequirement, MinorLevel1Course, ProgrammeAdvancedCourse, ProgrammeDepartmentalRequirement, ProgrammeLevel1Course, hash_password
 from app import db, text
 from flask import Flask, request, jsonify
-from .models import Course, Department, Faculty, User, Major, Minor
+from .models import Course, Department, Faculty, User, Majors, Minors, Programmes
 from werkzeug.security import check_password_hash, generate_password_hash
 from flask_login import login_user, logout_user
 
@@ -102,9 +102,9 @@ def search_results():
     models = {
         'department': (Department, 'name'),
         'faculty': (Faculty, 'name'),
-        'user': (User, 'username'),
-        'major': (Major, 'name'),
-        'minor': (Minor, 'name'),
+        'major': (Majors, 'name'),
+        'minor': (Minors, 'name'),
+        'programme': (Programmes, 'name'),
         'course': (Course, 'course_code', 'title')
     }
 
@@ -113,6 +113,10 @@ def search_results():
 
     # If filter_option is not provided or is not valid, search all models
     if filter_option not in models:
+        filter_option = 'all'
+
+    if filter_option == 'all':
+        # Search in all models
         for filter_option, model_info in models.items():
             if filter_option == 'course':
                 model, attribute_name1, attribute_name2 = model_info
@@ -124,6 +128,7 @@ def search_results():
                 items = model.query.filter(attribute.ilike(f'%{search_query}%')).all()
                 results[filter_option] = [getattr(item, attribute_name) for item in items]
     else:
+        # Search in the specified model
         if filter_option == 'course':
             model, attribute_name1, attribute_name2 = models[filter_option]
             items = model.query.filter(or_(getattr(model, attribute_name1).ilike(f'%{search_query}%'), getattr(model, attribute_name2).ilike(f'%{search_query}%'))).all()
@@ -133,6 +138,29 @@ def search_results():
             attribute = getattr(model, attribute_name)
             items = model.query.filter(attribute.ilike(f'%{search_query}%')).all()
             results[filter_option] = [getattr(item, attribute_name) for item in items]
+
+    # Return the results as JSON
+    return jsonify(results)
+
+@app.route('/all/<searchQuery>', methods=['GET'])
+def search_all(searchQuery):
+    # Perform a search in each resource
+    course_results = get_course(searchQuery)
+    major_results = get_major(searchQuery)
+    minor_results = get_minor(searchQuery)
+    programme_results = get_programme(searchQuery)
+    faculty_results = get_faculty(searchQuery)
+    department_results = get_department(searchQuery)
+
+    # Combine the results
+    results = {
+        'course': course_results,
+        'major': major_results,
+        'minor': minor_results,
+        'programme': programme_results,
+        'faculty': faculty_results,
+        'department': department_results
+    }
 
     # Return the results as JSON
     return jsonify(results)
@@ -154,20 +182,102 @@ def get_course(course_code):
         'faculty_name': course.faculty_name
     })
 
-@app.route('/department/<department_name>')
-def department_details(department_name):
-    department = Department.query.filter_by(name=department_name).first()
-    return render_template('department_details.html', department=department)
+@app.route('/major/<name>', methods=['GET'])
+def get_major(name):
+    major = Majors.query.get(name)
+    if major is None:
+        return {'error': 'Major not found'}, 404
 
-@app.route('/major/<major_name>')
-def major_details(major_name):
-    major = Major.query.filter_by(name=major_name).first()
-    return render_template('major_details.html', major=major)
+    level1_credits = major.level1_credits
+    advanced_credits = major.advanced_credits
+    major_level1_courses = MajorLevel1Course.query.filter_by(major=name).all()
+    major_advanced_courses = MajorAdvancedCourse.query.filter_by(major=name).all()
+    department = major.department
 
-@app.route('/minor/<minor_name>')
-def minor_details(minor_name):
-    minor = Minor.query.filter_by(name=minor_name).first()
-    return render_template('minor_details.html', minor=minor)
+    return jsonify({
+        'name': major.name,
+        'level1_credits': level1_credits,
+        'advanced_credits': advanced_credits,
+        'level1_courses': [course.course for course in major_level1_courses],
+        'advanced_courses': [course.course for course in major_advanced_courses],
+        'department': department
+    })
+
+@app.route('/minor/<name>', methods=['GET'])
+def get_minor(name):
+    minor = Minors.query.get(name)
+    if minor is None:
+        return {'error': 'Minor not found'}, 404
+
+    level1_credits = minor.level1_credits
+    advanced_credits = minor.advanced_credits
+    minor_level1_courses = MinorLevel1Course.query.filter_by(minor=name).all()
+    minor_advanced_courses = MinorAdvancedCourse.query.filter_by(minor=name).all()
+    department = minor.department
+
+    return jsonify({
+        'name': minor.name,
+        'level1_credits': level1_credits,
+        'advanced_credits': advanced_credits,
+        'level1_courses': [course.course for course in minor_level1_courses],
+        'advanced_courses': [course.course for course in minor_advanced_courses],
+        'department': department
+    })
+
+@app.route('/programme/<name>', methods=['GET'])
+def get_programme(name):
+    programme = Programmes.query.get(name)
+    if programme is None:
+        return {'error': 'Programme not found'}, 404
+
+    level1_credits = programme.level1_credits
+    advanced_credits = programme.advanced_credits
+    programme_level1_courses = ProgrammeLevel1Course.query.filter_by(programme=name).all()
+    programme_advanced_courses = ProgrammeAdvancedCourse.query.filter_by(programme=name).all()
+    deparment = programme.department
+
+    return jsonify({
+        'name': programme.name,
+        'level1_credits': level1_credits,
+        'advanced_credits': advanced_credits,
+        'level1_courses': [course.course for course in programme_level1_courses],
+        'advanced_courses': [course.course for course in programme_advanced_courses],
+        'department': deparment
+    })
+
+@app.route('/faculty/<name>', methods=['GET'])
+def get_faculty(name):
+    faculty = Faculty.query.get(name)
+    if faculty is None:
+        return {'error': 'Faculty not found'}, 404
+
+    return jsonify({
+        'name': faculty.name,
+        'level_1_credits_required': faculty.level_1_credits_required,
+        'advanced_credits_required': faculty.advanced_credits_required,
+        'foundation_credits_required': faculty.foundation_credits_required,
+        'departments': [department.name for department in Department.query.filter_by(faculty_name=faculty.name)],
+        'notes': faculty.notes
+    })
+
+@app.route('/department/<name>', methods=['GET'])
+def get_department(name):
+    department = Department.query.get(name)
+    if department is None:
+        return {'error': 'Department not found'}, 404
+
+    majors = [major.name for major in Majors.query.filter_by(department=department.name)]
+    minors = [minor.name for minor in Minors.query.filter_by(department=department.name)]
+    programmes = [programme.name for programme in Programmes.query.filter_by(department=department.name)]
+
+    return jsonify({
+        'name': department.name,
+        'faculty_name': department.faculty_name,
+        'course_count': Course.query.filter_by(department_name=department.name).count(),
+        'majors': majors,
+        'minors': minors,
+        'programmes': programmes,
+    })
 
 @login_required
 @app.route('/settings')

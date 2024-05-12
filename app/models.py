@@ -33,6 +33,10 @@ class Department(db.Model):
 class Faculty(db.Model):
     __tablename__ = 'faculty'
     name = db.Column(db.String, primary_key=True)
+    level_1_credits_required = db.Column(db.Integer)
+    advanced_credits_required = db.Column(db.Integer)
+    foundation_credits_required = db.Column(db.Integer)
+    notes = db.Column(db.Text)
 
 class User(db.Model):
     __tablename__ = 'users'
@@ -45,16 +49,6 @@ class Grade(db.Model):
     username = db.Column(db.String, db.ForeignKey('users.username'), primary_key=True)
     course_code = db.Column(db.String, db.ForeignKey('courses.course_code'), primary_key=True)
     grade = db.Column(db.Integer)
-
-class Major(db.Model):
-    __tablename__ = 'majors'
-    name = db.Column(db.String, primary_key=True)
-    course_code = db.Column(db.String, db.ForeignKey('courses.course_code'))
-
-class Minor(db.Model):
-    __tablename__ = 'minors'
-    name = db.Column(db.String, primary_key=True)
-    course_code = db.Column(db.String, db.ForeignKey('courses.course_code'))
 
 class PrerequisiteCourse(db.Model):
     __tablename__ = 'prerequisite_courses'
@@ -80,3 +74,255 @@ class AntirequisiteCourse(db.Model):
     __tablename__ = 'antirequisite_courses'
     course_code = db.Column(db.String, db.ForeignKey('courses.course_code'), primary_key=True)
     antirequisite_course_code = db.Column(db.String, primary_key=True)
+
+
+
+
+
+class Majors(db.Model):
+    __tablename__ = 'majors'
+    name = db.Column(db.String, primary_key=True)
+    level1_credits = db.Column(db.Integer, nullable=False)
+    advanced_credits = db.Column(db.Integer, nullable=False)
+    department = db.Column(db.String, nullable=False)
+    notes = db.Column(db.Text)
+
+class MajorLevel1Course(db.Model):
+    __tablename__ = 'major_level1_courses'
+    major = db.Column(db.String, db.ForeignKey('majors.name'), primary_key=True)
+    course = db.Column(db.String, primary_key=True)
+
+class MajorAdvancedCourse(db.Model):
+    __tablename__ = 'major_advanced_courses'
+    major = db.Column(db.String, db.ForeignKey('majors.name'), primary_key=True)
+    course = db.Column(db.String, primary_key=True)
+
+class MajorCourseAlternative(db.Model):
+    __tablename__ = 'major_course_alternatives'
+    major = db.Column(db.String, db.ForeignKey('majors.name'), primary_key=True)
+    course = db.Column(db.String, primary_key=True)
+    alternative = db.Column(db.String, primary_key=True)
+
+class MajorDepartmentalRequirement(db.Model):
+    __tablename__ = 'major_departmental_requirements'
+    major = db.Column(db.String, db.ForeignKey('majors.name'), primary_key=True)
+    department = db.Column(db.String, primary_key=True)
+    credits_required = db.Column(db.Integer, nullable=False)
+    level = db.Column(db.Integer)
+
+class MajorRecommendedCourse(db.Model):
+    __tablename__ = 'major_recommended_courses'
+    major = db.Column(db.String, db.ForeignKey('majors.name'), primary_key=True)
+    course = db.Column(db.String, primary_key=True)
+
+class MajorOptionalAdvancedCourse(db.Model):
+    __tablename__ = 'major_optional_advanced_courses'
+    major = db.Column(db.String, db.ForeignKey('majors.name'), primary_key=True)
+    course = db.Column(db.String, primary_key=True)
+
+class MajorRequirementFromOptionalAdvancedCourses(db.Model):
+    __tablename__ = 'major_requirement_from_optional_advanced_courses'
+    major = db.Column(db.String, db.ForeignKey('majors.name'), primary_key=True)
+    number_of_courses_required = db.Column(db.Integer, nullable=False)
+    credits_required = db.Column(db.Integer, nullable=False)
+
+class MajorOptionalCoreCoursesSet1(db.Model):
+    __tablename__ = 'major_optional_core_courses_set1'
+    major = db.Column(db.String, db.ForeignKey('majors.name'), primary_key=True)
+    course = db.Column(db.String, primary_key=True)
+
+class MajorRequirementFromOptionalCoreCoursesSet1(db.Model):
+    __tablename__ = 'major_requirement_from_optional_core_courses_set1'
+    major = db.Column(db.String, db.ForeignKey('majors.name'), primary_key=True)
+    number_of_courses_required = db.Column(db.Integer, nullable=False)
+    credits_required = db.Column(db.Integer, nullable=False)
+
+class MajorOptionalCoreCoursesSet2(db.Model):
+    __tablename__ = 'major_optional_core_courses_set2'
+    major = db.Column(db.String, db.ForeignKey('majors.name'), primary_key=True)
+    course = db.Column(db.String, primary_key=True)
+
+class MajorRequirementFromOptionalCoreCoursesSet2(db.Model):
+    __tablename__ = 'major_requirement_from_optional_core_courses_set2'
+    major = db.Column(db.String, db.ForeignKey('majors.name'), primary_key=True)
+    number_of_courses_required = db.Column(db.Integer, nullable=False)
+    credits_required = db.Column(db.Integer, nullable=False)
+
+class MajorOptionalCoreCoursesSet3(db.Model):
+    __tablename__ = 'major_optional_core_courses_set3'
+    major = db.Column(db.String, db.ForeignKey('majors.name'), primary_key=True)
+    course = db.Column(db.String, primary_key=True)
+
+class MajorRequirementFromOptionalCoreCoursesSet3(db.Model):
+    __tablename__ = 'major_requirement_from_optional_core_courses_set3'
+    major = db.Column(db.String, db.ForeignKey('majors.name'), primary_key=True)
+    number_of_courses_required = db.Column(db.Integer, nullable=False)
+    credits_required = db.Column(db.Integer, nullable=False)
+
+
+
+
+
+class Minors(db.Model):
+    __tablename__ = 'minors'
+    name = db.Column(db.String, primary_key=True)
+    level1_credits = db.Column(db.Integer, nullable=False)
+    advanced_credits = db.Column(db.Integer, nullable=False)
+    department = db.Column(db.String, nullable=False)
+    notes = db.Column(db.Text)
+
+class MinorLevel1Course(db.Model):
+    __tablename__ = 'minor_level1_courses'
+    minor = db.Column(db.String, db.ForeignKey('minors.name'), primary_key=True)
+    course = db.Column(db.String, primary_key=True)
+
+class MinorAdvancedCourse(db.Model):
+    __tablename__ = 'minor_advanced_courses'
+    minor = db.Column(db.String, db.ForeignKey('minors.name'), primary_key=True)
+    course = db.Column(db.String, primary_key=True)
+
+class MinorCourseAlternative(db.Model):
+    __tablename__ = 'minor_course_alternatives'
+    minor = db.Column(db.String, db.ForeignKey('minors.name'), primary_key=True)
+    course = db.Column(db.String, primary_key=True)
+    alternative = db.Column(db.String, primary_key=True)
+
+class MinorDepartmentalRequirement(db.Model):
+    __tablename__ = 'minor_departmental_requirements'
+    minor = db.Column(db.String, db.ForeignKey('minors.name'), primary_key=True)
+    department = db.Column(db.String, primary_key=True)
+    credits_required = db.Column(db.Integer, nullable=False)
+    level = db.Column(db.Integer)
+
+class MinorRecommendedCourse(db.Model):
+    __tablename__ = 'minor_recommended_courses'
+    minor = db.Column(db.String, db.ForeignKey('minors.name'), primary_key=True)
+    course = db.Column(db.String, primary_key=True)
+
+class MinorOptionalAdvancedCourse(db.Model):
+    __tablename__ = 'minor_optional_advanced_courses'
+    minor = db.Column(db.String, db.ForeignKey('minors.name'), primary_key=True)
+    course = db.Column(db.String, primary_key=True)
+
+class MinorRequirementFromOptionalAdvancedCourses(db.Model):
+    __tablename__ = 'minor_requirement_from_optional_advanced_courses'
+    minor = db.Column(db.String, db.ForeignKey('minors.name'), primary_key=True)
+    number_of_courses_required = db.Column(db.Integer)
+    credits_required = db.Column(db.Integer)
+
+class MinorOptionalCoreCoursesSet1(db.Model):
+    __tablename__ = 'minor_optional_core_courses_set1'
+    minor = db.Column(db.String, db.ForeignKey('minors.name'), primary_key=True)
+    course = db.Column(db.String, primary_key=True)
+
+class MinorRequirementFromOptionalCoreCoursesSet1(db.Model):
+    __tablename__ = 'minor_requirement_from_optional_core_courses_set1'
+    minor = db.Column(db.String, db.ForeignKey('minors.name'), primary_key=True)
+    number_of_courses_required = db.Column(db.Integer)
+    credits_required = db.Column(db.Integer)
+
+class MinorOptionalCoreCoursesSet2(db.Model):
+    __tablename__ = 'minor_optional_core_courses_set2'
+    minor = db.Column(db.String, db.ForeignKey('minors.name'), primary_key=True)
+    course = db.Column(db.String, primary_key=True)
+
+class MinorRequirementFromOptionalCoreCoursesSet2(db.Model):
+    __tablename__ = 'minor_requirement_from_optional_core_courses_set2'
+    minor = db.Column(db.String, db.ForeignKey('minors.name'), primary_key=True)
+    number_of_courses_required = db.Column(db.Integer)
+    credits_required = db.Column(db.Integer)
+
+class MinorOptionalCoreCoursesSet3(db.Model):
+    __tablename__ = 'minor_optional_core_courses_set3'
+    minor = db.Column(db.String, db.ForeignKey('minors.name'), primary_key=True)
+    course = db.Column(db.String, primary_key=True)
+
+class MinorRequirementFromOptionalCoreCoursesSet3(db.Model):
+    __tablename__ = 'minor_requirement_from_optional_core_courses_set3'
+    minor = db.Column(db.String, db.ForeignKey('minors.name'), primary_key=True)
+    number_of_courses_required = db.Column(db.Integer)
+    credits_required = db.Column(db.Integer)
+
+
+
+
+class Programmes(db.Model):
+    __tablename__ = 'programmes'
+    name = db.Column(db.String(50), primary_key=True)
+    level1_credits = db.Column(db.Integer, nullable=False)
+    advanced_credits = db.Column(db.Integer, nullable=False)
+    department = db.Column(db.String(50), nullable=False)
+    notes = db.Column(db.Text)
+
+class ProgrammeLevel1Course(db.Model):
+    __tablename__ = 'programme_level1_courses'
+    programme = db.Column(db.String(50), db.ForeignKey('programmes.name'), primary_key=True)
+    course = db.Column(db.String(8), primary_key=True)
+
+class ProgrammeAdvancedCourse(db.Model):
+    __tablename__ = 'programme_advanced_courses'
+    programme = db.Column(db.String(50), db.ForeignKey('programmes.name'), primary_key=True)
+    course = db.Column(db.String(8), primary_key=True)
+
+class ProgrammeCourseAlternative(db.Model):
+    __tablename__ = 'programme_course_alternatives'
+    programme = db.Column(db.String(50), db.ForeignKey('programmes.name'), primary_key=True)
+    course = db.Column(db.String(8), primary_key=True)
+    alternative = db.Column(db.String(8), primary_key=True)
+
+class ProgrammeDepartmentalRequirement(db.Model):
+    __tablename__ = 'programme_departmental_requirements'
+    programme = db.Column(db.String(50), db.ForeignKey('programmes.name'), primary_key=True)
+    department = db.Column(db.String(50), primary_key=True)
+    credits_required = db.Column(db.Integer, nullable=False)
+    level = db.Column(db.Integer)
+
+class ProgrammeRecommendedCourse(db.Model):
+    __tablename__ = 'programme_recommended_courses'
+    programme = db.Column(db.String(50), db.ForeignKey('programmes.name'), primary_key=True)
+    course = db.Column(db.String(8), primary_key=True)
+
+class ProgrammeOptionalAdvancedCourse(db.Model):
+    __tablename__ = 'programme_optional_advanced_courses'
+    programme = db.Column(db.String(50), db.ForeignKey('programmes.name'), primary_key=True)
+    course = db.Column(db.String(8), primary_key=True)
+
+class ProgrammeRequirementFromOptionalAdvancedCourses(db.Model):
+    __tablename__ = 'programme_requirement_from_optional_advanced_courses'
+    programme = db.Column(db.String(50), db.ForeignKey('programmes.name'), primary_key=True)
+    number_of_courses_required = db.Column(db.Integer)
+    credits_required = db.Column(db.Integer)
+
+class ProgrammeOptionalCoreCoursesSet1(db.Model):
+    __tablename__ = 'programme_optional_core_courses_set1'
+    programme = db.Column(db.String(50), db.ForeignKey('programmes.name'), primary_key=True)
+    course = db.Column(db.String(8), primary_key=True)
+
+class ProgrammeRequirementFromOptionalCoreCoursesSet1(db.Model):
+    __tablename__ = 'programme_requirement_from_optional_core_courses_set1'
+    programme = db.Column(db.String(50), db.ForeignKey('programmes.name'), primary_key=True)
+    number_of_courses_required = db.Column(db.Integer)
+    credits_required = db.Column(db.Integer)
+
+class ProgrammeOptionalCoreCoursesSet2(db.Model):
+    __tablename__ = 'programme_optional_core_courses_set2'
+    programme = db.Column(db.String(50), db.ForeignKey('programmes.name'), primary_key=True)
+    course = db.Column(db.String(8), primary_key=True)
+
+class ProgrammeRequirementFromOptionalCoreCoursesSet2(db.Model):
+    __tablename__ = 'programme_requirement_from_optional_core_courses_set2'
+    programme = db.Column(db.String(50), db.ForeignKey('programmes.name'), primary_key=True)
+    number_of_courses_required = db.Column(db.Integer)
+    credits_required = db.Column(db.Integer)
+
+class ProgrammeOptionalCoreCoursesSet3(db.Model):
+    __tablename__ = 'programme_optional_core_courses_set3'
+    programme = db.Column(db.String(50), db.ForeignKey('programmes.name'), primary_key=True)
+    course = db.Column(db.String(8), primary_key=True)
+
+class ProgrammeRequirementFromOptionalCoreCoursesSet3(db.Model):
+    __tablename__ = 'programme_requirement_from_optional_core_courses_set3'
+    programme = db.Column(db.String(50), db.ForeignKey('programmes.name'), primary_key=True)
+    number_of_courses_required = db.Column(db.Integer)
+    credits_required = db.Column(db.Integer)
+
