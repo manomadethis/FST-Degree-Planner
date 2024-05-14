@@ -1422,41 +1422,32 @@ def process_programme():
 
 @app.route('/process_single_major', methods=['POST'])
 def process_single_major():
-    major1 = request.form.get('major1')
-    process_major(major1)
-    return jsonify({'message': 'Processing single major'})
+    data = process_major()
+    return data
 
 @app.route('/process_two_majors', methods=['POST'])
 def process_two_majors():
-    major1 = request.form.get('major1')
-    major2 = request.form.get('major2')
-    process_major(major1)
-    process_major(major2)
-    return jsonify({'message': 'Processing two majors'})
+    data1, _ = process_major()  # assuming process_major() returns a tuple (dict, _)
+    data2, _ = process_major()  # assuming process_major() returns a tuple (dict, _)
+    return {**data1, **data2}
 
 @app.route('/process_major_and_minor', methods=['POST'])
 def process_major_and_minor():
-    major1 = request.form.get('major1')
-    minor1 = request.form.get('minor1')
-    process_major(major1)
-    process_minor(minor1)
-    return jsonify({'message': 'Processing major and minor'})
+    major_data = process_major()
+    minor_data = process_minor()
+    return {**major_data, **minor_data}
 
 @app.route('/process_major_and_two_minors', methods=['POST'])
 def process_major_and_two_minors():
-    major1 = request.form.get('major1')
-    minor1 = request.form.get('minor1')
-    minor2 = request.form.get('minor2')
-    process_major(major1)
-    process_minor(minor1)
-    process_minor(minor2)
-    return jsonify({'message': 'Processing major and two minors'})
+    major_data = process_major()
+    minor_data1 = process_minor()
+    minor_data2 = process_minor()
+    return {**major_data, **minor_data1, **minor_data2}
 
-@app.route('/process_programme', methods=['POST'])
-def process_programme():
-    programme = request.form.get('programme')
-    process_programme(programme)
-    return jsonify({'message': 'Processing programme'})
+@app.route('/process_single_programme', methods=['POST'])
+def process_single_programme():
+    data = process_programme()
+    return data
 
 def parse_semesters(semester_str):
     semesters = []

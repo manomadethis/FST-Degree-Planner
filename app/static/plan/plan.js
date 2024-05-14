@@ -95,34 +95,60 @@ $(document).ready(function() {
 
         /// Check if a valid combination was chosen
         if (programme && !(major1 || major2 || minor1 || minor2)) {
-            processDegreePlan('/process_programme', {programme: programme});
+            processDegreePlan('/process_single_programme', programme);
         } else if (major1 && !(major2 || minor1 || minor2 || programme)) {
-            processDegreePlan('/process_single_major', {major1: major1});
+            processDegreePlan('/process_single_major', major1);
         } else if (major2 && !(major1 || minor1 || minor2 || programme)) {
-            processDegreePlan('/process_single_major', {major1: major2});
+            processDegreePlan('/process_single_major', major2);
         } else if (major1 && major2 && !(minor1 || minor2 || programme)) {
-            processDegreePlan('/process_two_majors', {major1: major1, major2: major2});
+            processDegreePlan('/process_two_majors', major1);
+            processDegreePlan('/process_two_majors', major2);
         } else if (major1 && minor1 && !(major2 || minor2 || programme)) {
-            processDegreePlan('/process_major_and_minor', {major1: major1, minor1: minor1});
+            processDegreePlan('/process_major_and_minor', major1);
+            processDegreePlan('/process_major_and_minor', minor1);
         } else if (major2 && minor1 && !(major1 || minor2 || programme)) {
-            processDegreePlan('/process_major_and_minor', {major1: major2, minor1: minor1});
+            processDegreePlan('/process_major_and_minor', major2);
+            processDegreePlan('/process_major_and_minor', minor1);
         } else if (major1 && minor1 && minor2 && !(major2 || programme)) {
-            processDegreePlan('/process_major_and_two_minors', {major1: major1, minor1: minor1, minor2: minor2});
+            processDegreePlan('/process_major_and_two_minors', major1);
+            processDegreePlan('/process_major_and_two_minors', minor1);
+            processDegreePlan('/process_major_and_two_minors', minor2);
         } else {
             alert('Invalid combination chosen');
         }
-    });
-});
+            });
+        });
 
-function processDegreePlan(url, data) {
+function processDegreePlan(url, majorName) {
     $.ajax({
         url: url,
         type: 'POST',
-        data: JSON.stringify(data),
+        data: JSON.stringify({major_name: majorName}),
         contentType: 'application/json',
         success: function(response) {
             // Handle the response here
-            console.log(response.message);
+            console.log(response);  // response is now the JSON data
+
+            // Iterate over each year in the response
+            for (var year in response) {
+                // Iterate over each semester in the year
+                for (var semester in response[year]) {
+                    // Get the table cell for the current year and semester
+                    var cell = $('.' + year + '-row .' + semester);
+
+                    // Clear the cell
+                    cell.empty();
+
+                    // Iterate over each course in the semester
+                    for (var i = 0; i < response[year][semester].length; i++) {
+                        // Create a new course card
+                        var courseCard = $('<div class="course-card">' + response[year][semester][i] + '</div>');
+
+                        // Append the course card to the cell
+                        cell.append(courseCard);
+                    }
+                }
+            }
         },
         error: function(error) {
             // Handle error here
