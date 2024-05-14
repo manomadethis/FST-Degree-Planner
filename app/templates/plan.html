@@ -8,10 +8,13 @@
 <link rel="stylesheet" href="{{ url_for('static', filename='plan/sidebar.css') }}">
 <link rel="stylesheet" href="{{ url_for('static', filename='plan/degree_plan.css') }}">
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
 <script src="{{ url_for('static', filename='plan/plan.js') }}"></script>
 <script src="{{ url_for('static', filename='plan/system-mode.js') }}"></script>
 <script src="{{ url_for('static', filename='plan/sidebar.js') }}"></script>
-
 {% endblock %}
 
 {% block header %}
@@ -19,22 +22,37 @@
 {% endblock %}
 
 {% block content %}
-    <h1>Plan</h1>
+    <div class="action-buttons">
+        <button id="create" class="toolbar-button">Create</button>
+        <button id="import" class="toolbar-button">Import</button>
+        <button id="export" class="toolbar-button">Export</button>
+        <button id="clear" class="toolbar-button">Clear</button>
+        <button id="print" class="toolbar-button">Print</button>
+    </div>
+
     <div class="flex-container">
-
         <section class="plan">
-            <div class="no-plan">
-                <p>You don't have a plan.</p>
-                <button id="create-plan-button" class="material-icons">add</button>
-            </div>
+            {% include 'degree_plan.html' %}
+        </section>
 
-            <div class="create">
-                {% include 'create_plan.html' %}
+        <section class="plan-details">
+            <div class="requirements">
+                <p>Faculty credits: </p>
+                <p>Foundation course credits: </p>
+                <p>Level 1 credits: </p>
+                <p>Advanced credits: </p>
+                <p>Elective credits: </p>
+                <hr>
+                <p>Cumulative GPA: </p>
+                <p>Degree GPA: </p>
+                <hr>
+                <p>Graduation status: </p>
+                <hr>
+                <p>Notes: </p>
             </div>
-
-            <div class="degree-plan">
-                {% include 'degree_plan.html' %}
-            </div>
+        </section>
+        <section class="plan-creation">
+            {% include 'create_plan.html' %}
         </section>
     </div>
 {% endblock %}

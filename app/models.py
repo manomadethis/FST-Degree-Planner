@@ -1,5 +1,6 @@
 from werkzeug.security import generate_password_hash
 from . import db
+from sqlalchemy.orm import relationship
 
 # Testing the database connection
 def check_db_credentials():
@@ -36,6 +37,9 @@ class Faculty(db.Model):
     level_1_credits_required = db.Column(db.Integer)
     advanced_credits_required = db.Column(db.Integer)
     foundation_credits_required = db.Column(db.Integer)
+    semester1_credit_limit = db.Column(db.Integer)
+    semester2_credit_limit = db.Column(db.Integer)
+    semester3_credit_limit = db.Column(db.Integer)
     notes = db.Column(db.Text)
 
 class User(db.Model):
@@ -78,47 +82,46 @@ class AntirequisiteCourse(db.Model):
 
 
 
-
 class Majors(db.Model):
     __tablename__ = 'majors'
     name = db.Column(db.String, primary_key=True)
     level1_credits = db.Column(db.Integer, nullable=False)
     advanced_credits = db.Column(db.Integer, nullable=False)
-    department = db.Column(db.String, nullable=False)
+    department = db.Column(db.String, db.ForeignKey('departments.name'), nullable=False)
     notes = db.Column(db.Text)
 
 class MajorLevel1Course(db.Model):
     __tablename__ = 'major_level1_courses'
     major = db.Column(db.String, db.ForeignKey('majors.name'), primary_key=True)
-    course = db.Column(db.String, primary_key=True)
+    course = db.Column(db.String, db.ForeignKey('courses.course_code'), primary_key=True)
 
 class MajorAdvancedCourse(db.Model):
     __tablename__ = 'major_advanced_courses'
     major = db.Column(db.String, db.ForeignKey('majors.name'), primary_key=True)
-    course = db.Column(db.String, primary_key=True)
+    course = db.Column(db.String, db.ForeignKey('courses.course_code'), primary_key=True)
 
 class MajorCourseAlternative(db.Model):
     __tablename__ = 'major_course_alternatives'
     major = db.Column(db.String, db.ForeignKey('majors.name'), primary_key=True)
-    course = db.Column(db.String, primary_key=True)
-    alternative = db.Column(db.String, primary_key=True)
+    course = db.Column(db.String, db.ForeignKey('courses.course_code'), primary_key=True)
+    alternative = db.Column(db.String, db.ForeignKey('courses.course_code'), primary_key=True)
 
 class MajorDepartmentalRequirement(db.Model):
     __tablename__ = 'major_departmental_requirements'
     major = db.Column(db.String, db.ForeignKey('majors.name'), primary_key=True)
-    department = db.Column(db.String, primary_key=True)
+    department = db.Column(db.String, db.ForeignKey('departments.name'), primary_key=True)
     credits_required = db.Column(db.Integer, nullable=False)
     level = db.Column(db.Integer)
 
 class MajorRecommendedCourse(db.Model):
     __tablename__ = 'major_recommended_courses'
     major = db.Column(db.String, db.ForeignKey('majors.name'), primary_key=True)
-    course = db.Column(db.String, primary_key=True)
+    course = db.Column(db.String, db.ForeignKey('courses.course_code'), primary_key=True)
 
 class MajorOptionalAdvancedCourse(db.Model):
     __tablename__ = 'major_optional_advanced_courses'
     major = db.Column(db.String, db.ForeignKey('majors.name'), primary_key=True)
-    course = db.Column(db.String, primary_key=True)
+    course = db.Column(db.String, db.ForeignKey('courses.course_code'), primary_key=True)
 
 class MajorRequirementFromOptionalAdvancedCourses(db.Model):
     __tablename__ = 'major_requirement_from_optional_advanced_courses'
@@ -129,7 +132,7 @@ class MajorRequirementFromOptionalAdvancedCourses(db.Model):
 class MajorOptionalCoreCoursesSet1(db.Model):
     __tablename__ = 'major_optional_core_courses_set1'
     major = db.Column(db.String, db.ForeignKey('majors.name'), primary_key=True)
-    course = db.Column(db.String, primary_key=True)
+    course = db.Column(db.String, db.ForeignKey('courses.course_code'), primary_key=True)
 
 class MajorRequirementFromOptionalCoreCoursesSet1(db.Model):
     __tablename__ = 'major_requirement_from_optional_core_courses_set1'
@@ -140,7 +143,7 @@ class MajorRequirementFromOptionalCoreCoursesSet1(db.Model):
 class MajorOptionalCoreCoursesSet2(db.Model):
     __tablename__ = 'major_optional_core_courses_set2'
     major = db.Column(db.String, db.ForeignKey('majors.name'), primary_key=True)
-    course = db.Column(db.String, primary_key=True)
+    course = db.Column(db.String, db.ForeignKey('courses.course_code'), primary_key=True)
 
 class MajorRequirementFromOptionalCoreCoursesSet2(db.Model):
     __tablename__ = 'major_requirement_from_optional_core_courses_set2'
@@ -151,7 +154,7 @@ class MajorRequirementFromOptionalCoreCoursesSet2(db.Model):
 class MajorOptionalCoreCoursesSet3(db.Model):
     __tablename__ = 'major_optional_core_courses_set3'
     major = db.Column(db.String, db.ForeignKey('majors.name'), primary_key=True)
-    course = db.Column(db.String, primary_key=True)
+    course = db.Column(db.String, db.ForeignKey('courses.course_code'), primary_key=True)
 
 class MajorRequirementFromOptionalCoreCoursesSet3(db.Model):
     __tablename__ = 'major_requirement_from_optional_core_courses_set3'

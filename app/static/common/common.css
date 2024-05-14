@@ -88,21 +88,21 @@ h6 {
 :root.light {
   --text: hsl(63, 69%, 5%);
   --background: hsl(210, 20%, 98%);
-  --primary: hsl(193, 52%, 54%);
-  --secondary: hsl(151, 78%, 29%);
-  --accent: hsl(232, 100%, 20%);
+  --primary: hsl(219, 55%, 50%);
+  --secondary: hsl(231, 58%, 35%);
+  --accent: hsl(53, 92%, 55%);
   --box-shadow: hsla(0, 0%, 0%, 0.08);
   --border-color: hsl(0, 0%, 53%);
   --margin: 1.5rem;
-  --card-background: hsla(0, 0%, 0%, 0.03);
+  --card-background: hsla(0, 0%, 10%, 0.20);
 }
 
 :root.dark {
   --text: hsl(63, 69%, 95%);
   --background: hsl(0, 0%, 7%);
-  --primary: hsl(193, 52%, 46%);
-  --secondary: hsl(151, 78%, 71%);
-  --accent: hsl(232, 100%, 80%);
+  --primary: hsl(219, 55%, 50%);
+  --secondary: hsl(231, 58%, 65%);
+  --accent: hsl(53, 92%, 45%);
   --box-shadow: hsla(0, 0%, 100%, 0.08);
   --border-color: hsl(0, 0%, 53%);
   --margin: 1.5rem;

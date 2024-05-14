@@ -3,12 +3,15 @@ from flask_login import current_user, login_required, login_user, logout_user
 from . import create_app
 from .forms import LoginForm, SignupForm
 from .user import User, load_user
-from .models import MajorAdvancedCourse, MajorDepartmentalRequirement, MajorLevel1Course, MinorAdvancedCourse, MinorDepartmentalRequirement, MinorLevel1Course, ProgrammeAdvancedCourse, ProgrammeDepartmentalRequirement, ProgrammeLevel1Course, hash_password
-from app import db, text
+from .models import AntirequisiteCourse, CorequisiteCourse, Majors, MajorAdvancedCourse, MajorLevel1Course, Minors, MinorAdvancedCourse, MinorLevel1Course, PrerequisiteCourse, ProgrammeAdvancedCourse, ProgrammeLevel1Course
+from app import db, process_degree_plan, text
 from flask import Flask, request, jsonify
 from .models import Course, Department, Faculty, User, Majors, Minors, Programmes
 from werkzeug.security import check_password_hash, generate_password_hash
-from flask_login import login_user, logout_user
+from flask_login import login_user, logout_user, current_user
+from sqlalchemy import or_, func
+from sqlalchemy.orm import joinedload
+import re
 
 app = create_app()
 
@@ -80,6 +83,14 @@ def signup():
 def plan():
     return render_template('plan.html')
 
+@app.route('/create_plan')
+def create_plan():
+    courses = Course.query.all()
+    majors = Majors.query.all()
+    minors = Minors.query.all()
+    programmes = Programmes.query.all()
+    return render_template('create_plan.html', courses=courses, majors=majors, minors=minors, programmes=programmes)
+
 @login_required
 @app.route('/profile')
 def profile():
@@ -89,8 +100,6 @@ def profile():
 @app.route('/search')
 def search():
     return render_template('search.html')
-
-from sqlalchemy import or_, func
 
 @login_required
 @app.route('/search_results', methods=['POST'])
@@ -144,6 +153,7 @@ def search_results():
 
 @app.route('/all/<searchQuery>', methods=['GET'])
 def search_all(searchQuery):
+
     # Perform a search in each resource
     course_results = get_course(searchQuery)
     major_results = get_major(searchQuery)
@@ -165,6 +175,11 @@ def search_all(searchQuery):
     # Return the results as JSON
     return jsonify(results)
 
+@app.route('/get_courses')
+def get_courses():
+    courses = Course.query.all()
+    return jsonify([f"{course.course_code} - {course.title}" for course in courses])
+
 @app.route('/course/<course_code>', methods=['GET'])
 def get_course(course_code):
     course = Course.query.get(course_code)
@@ -181,6 +196,11 @@ def get_course(course_code):
         'department_name': course.department_name,
         'faculty_name': course.faculty_name
     })
+
+@app.route('/get_majors')
+def get_majors():
+    majors = Majors.query.all()
+    return jsonify([major.name for major in majors])
 
 @app.route('/major/<name>', methods=['GET'])
 def get_major(name):
@@ -202,6 +222,11 @@ def get_major(name):
         'advanced_courses': [course.course for course in major_advanced_courses],
         'department': department
     })
+
+@app.route('/get_minors')
+def get_minors():
+    minors = Minors.query.all()
+    return jsonify([minor.name for minor in minors])
 
 @app.route('/minor/<name>', methods=['GET'])
 def get_minor(name):
@@ -245,6 +270,11 @@ def get_programme(name):
         'department': deparment
     })
 
+@app.route('/get_programmes')
+def get_programmes():
+    programmes = Programmes.query.all()
+    return jsonify([programme.name for programme in programmes])
+
 @app.route('/faculty/<name>', methods=['GET'])
 def get_faculty(name):
     faculty = Faculty.query.get(name)
@@ -278,6 +308,104 @@ def get_department(name):
         'minors': minors,
         'programmes': programmes,
     })
+
+@app.route('/get_departments')
+def get_departments():
+    departments = Department.query.all()
+    return jsonify([department.name for department in departments])
+
+@app.route('/get_faculties')
+def get_faculties():
+    faculties = Faculty.query.all()
+    return jsonify([faculty.name for faculty in faculties])
+
+
+    
+
+
+def validate_major(major_name):
+    # Query the Majors table to find the major
+    major = Majors.query.filter_by(name=major_name).first()
+
+    # Return the name of the major or None
+    return major.name if major else None
+
+@app.route('/process_major_level1_courses', methods=['POST'])
+def process_major_level1_courses():
+    # Get the major name from the request data
+    major_name = request.json.get('major_name')
+
+    # Validate the major
+    major = validate_major(major_name)
+    if not major:
+        return jsonify({'message': f'Major {major_name} not found'}), 404
+
+    # Query the MajorLevel1Course table to find the courses for the major
+    level1_courses = MajorLevel1Course.query.filter_by(major=major_name).all()
+
+    # Initialize the response data structure
+    data = {
+        'year1': {'semester1': [], 'semester2': [], 'semester3': []},
+        'year2': {'semester1': [], 'semester2': [], 'semester3': []},
+        'year3': {'semester1': [], 'semester2': [], 'semester3': []},
+    }
+
+    # Process the courses
+    for course in level1_courses:
+        # Query the Course table to find the course
+        course_details = Course.query.filter_by(course_code=course.course).first()
+
+        if course_details:
+            # Check the level of the course
+            level = course_details.level
+
+            # Parse semesters correctly
+            semesters = parse_semesters(course_details.semester)
+
+            # Get the prerequisites, corequisites, and antirequisites for the course
+            prerequisites = PrerequisiteCourse.query.filter_by(course_code=course.course).all()
+            corequisites = CorequisiteCourse.query.filter_by(course_code=course.course).all()
+            antirequisites = AntirequisiteCourse.query.filter_by(course_code=course.course).all()
+
+            # Process the prerequisites
+            for prerequisite in prerequisites:
+                prerequisite_course = Course.query.filter_by(course_code=prerequisite.prerequisite_course_code).first()
+                if prerequisite_course and prerequisite_course.course_code not in data[f'year{level}'][f'semester{semester}']:
+                    # Delay processing this course
+                    continue
+
+            # Process the corequisites
+            for corequisite in corequisites:
+                corequisite_course = Course.query.filter_by(course_code=corequisite.corequisite_course_code).first()
+                if corequisite_course and corequisite_course.course_code not in data[f'year{level}'][f'semester{semester}']:
+                    # Add the corequisite to the same semester
+                    data[f'year{level}'][f'semester{semester}'].append(corequisite_course.course_code)
+
+            # Process the antirequisites
+            for antirequisite in antirequisites:
+                antirequisite_course = Course.query.filter_by(course_code=antirequisite.antirequisite_course_code).first()
+                if antirequisite_course and antirequisite_course.course_code in data[f'year{level}'][f'semester{semester}']:
+                    # Remove the antirequisite from the semester
+                    data[f'year{level}'][f'semester{semester}'].remove(antirequisite_course.course_code)
+
+            # Add the course to the appropriate semesters in the response data
+            for semester in semesters:
+                data[f'year{level}'][f'semester{semester}'].append(course_details.course_code)
+
+    return jsonify(data), 200
+
+def parse_semesters(semester_str):
+    semesters = []
+    semester_str = semester_str.lower().replace('and', ',').replace('or', ',').replace('&', ',')
+    for part in semester_str.split(','):
+        part = part.strip()
+        if 'to' in part:
+            start, end = part.split('to')
+            semesters.extend(list(range(int(start), int(end)+1)))
+        else:
+            semesters.append(int(part))
+    return semesters
+
 
 @login_required
 @app.route('/settings')

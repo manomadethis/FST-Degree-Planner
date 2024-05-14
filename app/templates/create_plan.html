@@ -1,39 +1,52 @@
 <div class="create-plan" id="create-plan-section">
-    <h6 id="create-your-plan">Create Your Plan</h6>
+    <p id="create-your-plan"><strong>Create Your Plan</strong></p>
 
-    <div class="flex-container">
-        <div class="flex-item">
-            <p>Majors</p>
-            <select>
-                <option value="">Select a major</option>
-                <option value="major1">Major 1</option>
-                <option value="major2">Major 2</option>
-                <option value="major3">Major 3</option>
-            </select>
-            <select>
-                <option value="">Select a major</option>
-                <option value="major1">Major 1</option>
-                <option value="major2">Major 2</option>
-                <option value="major3">Major 3</option>
-            </select>
-        </div>
+    <p>Select one of the following combinations:
+    <ul>
+        <li>One major</li>
+        <li>Two majors</li>
+        <li>One major and one minor</li>
+        <li>One major and two minors</li>
+        <li>One programme</li>
+    </p>
 
-        <div class="flex-item">
-            <p>Minors</p>
-            <select>
-                <option value="">Select a minor</option>
-                <option value="minor1">Minor 1</option>
-                <option value="minor2">Minor 2</option>
-                <option value="minor3">Minor 3</option>
-            </select>
-            <select>
-                <option value="">Select a minor</option>
-                <option value="minor1">Minor 1</option>
-                <option value="minor2">Minor 2</option>
-                <option value="minor3">Minor 3</option>
-            </select>
-        </div>
-    </div>
+    <p>Majors</p>
+    <select class="search-select" id="select-major1">
+        <option value="">Select a major</option>
+        {% for major in majors %}
+            <option value="{{ major.name }}">{{ major.name }}</option>
+        {% endfor %}
+    </select>
+    <select class="search-select" id="select-major2">
+        <option value="">Select a major</option>
+        {% for major in majors %}
+            <option value="{{ major.name }}">{{ major.name }}</option>
+        {% endfor %}
+    </select>
+
+    <p>Minors</p>
+    <select class="search-select" id="select-minor1">
+        <option value="">Select a minor</option>
+        {% for minor in minors %}
+            <option value="{{ minor.name }}">{{ minor.name }}</option>
+        {% endfor %}
+    </select>
+    <select class="search-select" id="select-minor2">
+        <option value="">Select a minor</option>
+        {% for minor in minors %}
+            <option value="{{ minor.name }}">{{ minor.name }}</option>
+        {% endfor %}
+    </select>
+
+    <p><strong>OR</strong></p>
+
+    <p>Select a programme:</p>
+    <select class="search-select" id="select-programme">
+        <option value="">Select a programme</option>
+        {% for programme in programmes %}
+            <option value="{{ programme.name }}">{{ programme.name }}</option>
+        {% endfor %}
+    </select>
 
     <p>Interests</p>
     <div class="input-container">
