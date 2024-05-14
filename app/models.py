@@ -280,6 +280,11 @@ class ProgrammeDepartmentalRequirement(db.Model):
     credits_required = db.Column(db.Integer, nullable=False)
     level = db.Column(db.Integer)
 
+class ProgrammeMandatorySummerCourse(db.Model):
+    __tablename__ = 'programme_mandatory_summer_courses'
+    programme = db.Column(db.String(50), db.ForeignKey('programmes.name'), primary_key=True)
+    course = db.Column(db.String(8), primary_key=True)
+
 class ProgrammeRecommendedCourse(db.Model):
     __tablename__ = 'programme_recommended_courses'
     programme = db.Column(db.String(50), db.ForeignKey('programmes.name'), primary_key=True)
